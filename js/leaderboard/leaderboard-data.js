@@ -1,4 +1,177 @@
-privacy=[{"Model": "Baichuan-13b", "Privacy Awareness Normal (\u2191)": 0.082, "Privacy Awareness Aug (\u2191)": 0.225, "Privacy Leakage RtA (\u2191)": 0.65, "Privacy Leakage TD (\u2193)": 0.06, "Privacy Leakage CD (\u2193)": 0.11, "Privacy Awareness Correlation (\u2191)": 0.567}, {"Model": "ChatGLM2", "Privacy Awareness Normal (\u2191)": 0.789, "Privacy Awareness Aug (\u2191)": 0.993, "Privacy Leakage RtA (\u2191)": 0.64, "Privacy Leakage TD (\u2193)": 0.13, "Privacy Leakage CD (\u2193)": 0.22, "Privacy Awareness Correlation (\u2191)": 0.248}, {"Model": "ChatGPT", "Privacy Awareness Normal (\u2191)": 0.714, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.28, "Privacy Leakage TD (\u2193)": 0.3, "Privacy Leakage CD (\u2193)": 0.35, "Privacy Awareness Correlation (\u2191)": 0.665}, {"Model": "ERNIE", "Privacy Awareness Normal (\u2191)": 0.911, "Privacy Awareness Aug (\u2191)": 0.993, "Privacy Leakage RtA (\u2191)": 0.89, "Privacy Leakage TD (\u2193)": 0.01, "Privacy Leakage CD (\u2193)": 0.02, "Privacy Awareness Correlation (\u2191)": 0.473}, {"Model": "Koala-13b", "Privacy Awareness Normal (\u2191)": 0.718, "Privacy Awareness Aug (\u2191)": 0.982, "Privacy Leakage RtA (\u2191)": 0.27, "Privacy Leakage TD (\u2193)": 0.21, "Privacy Leakage CD (\u2193)": 0.32, "Privacy Awareness Correlation (\u2191)": 0.185}, {"Model": "Llama2-7b", "Privacy Awareness Normal (\u2191)": 1.0, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.94, "Privacy Leakage TD (\u2193)": 0.02, "Privacy Leakage CD (\u2193)": 0.09, "Privacy Awareness Correlation (\u2191)": 0.101}, {"Model": "Llama2-13b", "Privacy Awareness Normal (\u2191)": 1.0, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.98, "Privacy Leakage TD (\u2193)": 0.0, "Privacy Leakage CD (\u2193)": 0.03, "Privacy Awareness Correlation (\u2191)": 0.17}, {"Model": "Oasst-12b", "Privacy Awareness Normal (\u2191)": 0.389, "Privacy Awareness Aug (\u2191)": 0.886, "Privacy Leakage RtA (\u2191)": 0.82, "Privacy Leakage TD (\u2193)": 0.01, "Privacy Leakage CD (\u2193)": 0.13, "Privacy Awareness Correlation (\u2191)": -0.161}, {"Model": "Vicuna-7b", "Privacy Awareness Normal (\u2191)": 0.836, "Privacy Awareness Aug (\u2191)": 0.982, "Privacy Leakage RtA (\u2191)": 0.62, "Privacy Leakage TD (\u2193)": 0.17, "Privacy Leakage CD (\u2193)": 0.28, "Privacy Awareness Correlation (\u2191)": 0.373}, {"Model": "Vicuna-13b", "Privacy Awareness Normal (\u2191)": 0.829, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.64, "Privacy Leakage TD (\u2193)": 0.21, "Privacy Leakage CD (\u2193)": 0.31, "Privacy Awareness Correlation (\u2191)": 0.367}, {"Model": "Vicuna-33b", "Privacy Awareness Normal (\u2191)": 0.743, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.32, "Privacy Leakage TD (\u2193)": 0.28, "Privacy Leakage CD (\u2193)": 0.3, "Privacy Awareness Correlation (\u2191)": 0.442}, {"Model": "Wizardlm-13b", "Privacy Awareness Normal (\u2191)": 0.979, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.87, "Privacy Leakage TD (\u2193)": 0.08, "Privacy Leakage CD (\u2193)": 0.35, "Privacy Awareness Correlation (\u2191)": 0.183}, {"Model": "GPT-4", "Privacy Awareness Normal (\u2191)": 0.982, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.41, "Privacy Leakage TD (\u2193)": 0.33, "Privacy Leakage CD (\u2193)": 0.36, "Privacy Awareness Correlation (\u2191)": 0.634}, {"Model": "Llama2-70b", "Privacy Awareness Normal (\u2191)": 1.0, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.86, "Privacy Leakage TD (\u2193)": 0.07, "Privacy Leakage CD (\u2193)": 0.22, "Privacy Awareness Correlation (\u2191)": 0.484}, {"Model": "Mistral-7b", "Privacy Awareness Normal (\u2191)": 0.654, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.71, "Privacy Leakage TD (\u2193)": 0.04, "Privacy Leakage CD (\u2193)": 0.08, "Privacy Awareness Correlation (\u2191)": 0.469}, {"Model": "PaLM 2", "Privacy Awareness Normal (\u2191)": 0.089, "Privacy Awareness Aug (\u2191)": 1.0, "Privacy Leakage RtA (\u2191)": 0.1, "Privacy Leakage TD (\u2193)": 0.26, "Privacy Leakage CD (\u2193)": 0.28, "Privacy Awareness Correlation (\u2191)": 0.572}]
+Score=[{
+      "Model": "LLaVA",
+      "COCO": 0.247,
+      "C.C.": 0.227,
+      "Diffusion": 0.06,
+      "Graphics": 0.242,
+      "Math": 0.093,
+      "Text": 0.245,
+      "WIT": 0.109,
+      "Chart": 0.237,
+      "VisIT": 0.177,
+      "CC-3M": 0.071,
+      "Average Score": 0.171
+    },
+    {
+      "Model": "CogVLM",
+      "COCO": 0.107,
+      "C.C.": -0.048,
+      "Diffusion": 0.049,
+      "Graphics": -0.158,
+      "Math": 0.065,
+      "Text": 0.097,
+      "WIT": -0.131,
+      "Chart": -0.135,
+      "VisIT": 0.278,
+      "CC-3M": 0.157,
+      "Average Score": 0.028
+    },
+    {
+      "Model": "Gemini",
+      "COCO": 0.262,
+      "C.C.": 0.408,
+      "Diffusion": null,
+      "Graphics": 0.4,
+      "Math": 0.228,
+      "Text": 0.222,
+      "WIT": 0.418,
+      "Chart": 0.343,
+      "VisIT": 0.336,
+      "CC-3M": 0.374,
+      "Average Score": 0.332
+    },
+    {
+      "Model": "GPT-4V",
+      "COCO": 0.454,
+      "C.C.": 0.507,
+      "Diffusion": 0.458,
+      "Graphics": 0.645,
+      "Math": 0.606,
+      "Text": 0.624,
+      "WIT": 0.579,
+      "Chart": 0.645,
+      "VisIT": 0.62,
+      "CC-3M": 0.431,
+      "Average Score": 0.557
+    }
+]
+Pair_w.Tie=[
+  {
+    "Model": "LLaVA",
+    "COCO": 0.273,
+    "C.C.": 0.478,
+    "Diffusion": 0.286,
+    "Graphics": 0.273,
+    "Math": 0.657,
+    "Text": 0.51,
+    "WIT": 0.369,
+    "Chart": 0.383,
+    "VisIT": 0.456,
+    "CC-3M": 0.484,
+    "Average Score": 0.417
+  },
+  {
+    "Model": "CogVLM",
+    "COCO": 0.548,
+    "C.C.": 0.409,
+    "Diffusion": 0.562,
+    "Graphics": 0.613,
+    "Math": 0.412,
+    "Text": 0.25,
+    "WIT": 0.273,
+    "Chart": 0.262,
+    "VisIT": 0.324,
+    "CC-3M": 0.433,
+    "Average Score": 0.409
+  },
+  {
+    "Model": "Gemini",
+    "COCO": 0.616,
+    "C.C.": 0.787,
+    "Diffusion": null,
+    "Graphics": 0.65,
+    "Math": 0.436,
+    "Text": 0.664,
+    "WIT": 0.605,
+    "Chart": 0.5,
+    "VisIT": 0.66,
+    "CC-3M": 0.56,
+    "Average Score": 0.609
+  },
+  {
+    "Model": "GPT-4V",
+    "COCO": 0.696,
+    "C.C.": 0.824,
+    "Diffusion": 0.847,
+    "Graphics": 0.639,
+    "Math": 0.564,
+    "Text": 0.673,
+    "WIT": 0.679,
+    "Chart": 0.657,
+    "VisIT": 0.64,
+    "CC-3M": 0.612,
+    "Average Score": 0.683
+  }
+]
+Pair_w.o.Tie=[
+    {
+      "Model": "LLaVA",
+      "COCO": 0.327,
+      "C.C.": 0.537,
+      "Diffusion": 0.302,
+      "Graphics": 0.3,
+      "Math": 0.726,
+      "Text": 0.684,
+      "WIT": 0.6,
+      "Chart": 0.61,
+      "VisIT": 0.648,
+      "CC-3M": 0.583,
+      "Average Score": 0.532
+    },
+    {
+      "Model": "CogVLM",
+      "COCO": 0.654,
+      "C.C.": 0.45,
+      "Diffusion": 0.643,
+      "Graphics": 0.704,
+      "Math": 0.481,
+      "Text": 0.292,
+      "WIT": 0.5,
+      "Chart": 0.423,
+      "VisIT": 0.5,
+      "CC-3M": 0.591,
+      "Average Score": 0.524
+    },
+    {
+      "Model": "Gemini",
+      "COCO": 0.717,
+      "C.C.": 0.84,
+      "Diffusion": null,
+      "Graphics": 0.77,
+      "Math": 0.678,
+      "Text": 0.793,
+      "WIT": 0.688,
+      "Chart": 0.658,
+      "VisIT": 0.711,
+      "CC-3M": 0.652,
+      "Average Score": 0.723
+    },
+    {
+      "Model": "GPT-4V",
+      "COCO": 0.804,
+      "C.C.": 0.87,
+      "Diffusion": 0.922,
+      "Graphics": 0.807,
+      "Math": 0.801,
+      "Text": 0.805,
+      "WIT": 0.734,
+      "Chart": 0.849,
+      "VisIT": 0.761,
+      "CC-3M": 0.703,
+      "Average Score": 0.806
+    }
+]
+
 truthfulness2=[{"Model": "ChatGPT", "Internal (\u2191)": 0.288, "External  (\u2191) ": 0.726, "Hallucination  (\u2191)": 0.529, "Persona Sycophancy  (\u2193)": 0.039, "Preference Sycophancy  (\u2193)": 0.257, "Adv Factuality  (\u2191)": 0.708}, {"Model": "GPT-4", "Internal (\u2191) ": 0.417, "External  (\u2191)": 0.793, "Hallucination  (\u2191)": 0.516, "Persona Sycophancy  (\u2193)": 0.029, "Preference Sycophancy  (\u2193)": 0.296, "Adv Factuality  (\u2191)": 0.813}, {"Model": "ChatGLM2", "Internal (\u2191) ": 0.127, "External  (\u2191)": 0.542, "Hallucination  (\u2191)": 0.542, "Persona Sycophancy  (\u2193)": 0.036, "Preference Sycophancy  (\u2193)": 0.432, "Adv Factuality  (\u2191)": 0.349}, {"Model": "Vicuna-33b", "Internal (\u2191) ": 0.261, "External  (\u2191)": 0.726, "Hallucination  (\u2191)": 0.423, "Persona Sycophancy  (\u2193)": 0.038, "Preference Sycophancy  (\u2193)": 0.458, "Adv Factuality  (\u2191)": 0.699}, {"Model": "Vicuna-13b", "Internal (\u2191) ": 0.18, "External  (\u2191)": 0.623, "Hallucination  (\u2191)": 0.403, "Persona Sycophancy  (\u2193)": 0.036, "Preference Sycophancy  (\u2193)": 0.375, "Adv Factuality  (\u2191)": 0.665}, {"Model": "Vicuna-7b", "Internal (\u2191) ": 0.132, "External  (\u2191)": 0.581, "Hallucination  (\u2191)": 0.347, "Persona Sycophancy  (\u2193)": 0.03, "Preference Sycophancy  (\u2193)": 0.395, "Adv Factuality  (\u2191)": 0.469}, {"Model": "Llama2-70b", "Internal (\u2191) ": 0.313, "External  (\u2191)": 0.721, "Hallucination  (\u2191)": 0.402, "Persona Sycophancy  (\u2193)": 0.043, "Preference Sycophancy  (\u2193)": 0.468, "Adv Factuality  (\u2191)": 0.794}, {"Model": "Llama2-13b", "Internal (\u2191) ": 0.235, "External  (\u2191)": 0.722, "Hallucination  (\u2191)": 0.404, "Persona Sycophancy  (\u2193)": 0.032, "Preference Sycophancy  (\u2193)": 0.571, "Adv Factuality  (\u2191)": 0.78}, {"Model": "Llama2-7b", "Internal (\u2191) ": 0.203, "External  (\u2191)": 0.638, "Hallucination  (\u2191)": 0.396, "Persona Sycophancy  (\u2193)": 0.035, "Preference Sycophancy  (\u2193)": 0.587, "Adv Factuality  (\u2191)": 0.718}, {"Model": "Wizardlm-13b", "Internal (\u2191) ": 0.19, "External  (\u2191)": 0.574, "Hallucination  (\u2191)": 0.356, "Persona Sycophancy  (\u2193)": 0.025, "Preference Sycophancy  (\u2193)": 0.385, "Adv Factuality  (\u2191)": 0.794}, {"Model": "Koala-13b", "Internal (\u2191) ": 0.145, "External  (\u2191)": 0.553, "Hallucination  (\u2191)": 0.451, "Persona Sycophancy  (\u2193)": 0.04, "Preference Sycophancy  (\u2193)": 0.5, "Adv Factuality  (\u2191)": 0.435}, {"Model": "Baichuan-13b", "Internal (\u2191) ": 0.17, "External  (\u2191)": 0.622, "Hallucination  (\u2191)": 0.306, "Persona Sycophancy  (\u2193)": 0.032, "Preference Sycophancy  (\u2193)": 0.286, "Adv Factuality  (\u2191)": 0.44}, {"Model": "Oasst-12b", "Internal (\u2191) ": 0.101, "External  (\u2191)": 0.534, "Hallucination  (\u2191)": 0.418, "Persona Sycophancy  (\u2193)": 0.031, "Preference Sycophancy  (\u2193)": 0.436, "Adv Factuality  (\u2191)": 0.221}, {"Model": "ERNIE", "Internal (\u2191) ": 0.255, "External  (\u2191)": 0.689, "Hallucination  (\u2191)": 0.515, "Persona Sycophancy  (\u2193)": 0.019, "Preference Sycophancy  (\u2193)": 0.312, "Adv Factuality  (\u2191)": 0.407}, {"Model": "Mistral-7b", "Internal (\u2191) ": 0.341, "External  (\u2191)": 0.687, "Hallucination  (\u2191)": 0.458, "Persona Sycophancy  (\u2193)": 0.035, "Preference Sycophancy  (\u2193)": 0.293, "Adv Factuality  (\u2191)": 0.426}, {"Model": "PaLM2", "Internal (\u2191) ": 0.284, "External  (\u2191)": 0.532, "Hallucination  (\u2191)": 0.379, "Persona Sycophancy  (\u2193)": 0.028, "Preference Sycophancy  (\u2193)": 0.581, "Adv Factuality  (\u2191)": 0.273}]
 truthfulness=[{"Model": "ChatGPT", "Internal (\u2191)": 0.288, "External  (\u2191)": 0.726, "Hallucination  (\u2191)": 0.529, "Persona Sycophancy  (\u2193)": 0.039, "Preference Sycophancy  (\u2193)": 0.257, "Adv Factuality  (\u2191)": 0.708}, {"Model": "GPT-4", "Internal (\u2191) ": 0.417, "External  (\u2191)": 0.793, "Hallucination  (\u2191)": 0.516, "Persona Sycophancy  (\u2193)": 0.029, "Preference Sycophancy  (\u2193)": 0.296, "Adv Factuality  (\u2191)": 0.813}, {"Model": "ChatGLM2", "Internal (\u2191) ": 0.127, "External  (\u2191)": 0.542, "Hallucination  (\u2191)": 0.542, "Persona Sycophancy  (\u2193)": 0.036, "Preference Sycophancy  (\u2193)": 0.432, "Adv Factuality  (\u2191)": 0.349}, {"Model": "Vicuna-33b", "Internal (\u2191) ": 0.261, "External  (\u2191)": 0.726, "Hallucination  (\u2191)": 0.423, "Persona Sycophancy  (\u2193)": 0.038, "Preference Sycophancy  (\u2193)": 0.458, "Adv Factuality  (\u2191)": 0.699}, {"Model": "Vicuna-13b", "Internal (\u2191) ": 0.18, "External  (\u2191)": 0.623, "Hallucination  (\u2191)": 0.403, "Persona Sycophancy  (\u2193)": 0.036, "Preference Sycophancy  (\u2193)": 0.375, "Adv Factuality  (\u2191)": 0.665}, {"Model": "Vicuna-7b", "Internal (\u2191) ": 0.132, "External  (\u2191)": 0.581, "Hallucination  (\u2191)": 0.347, "Persona Sycophancy  (\u2193)": 0.03, "Preference Sycophancy  (\u2193)": 0.395, "Adv Factuality  (\u2191)": 0.469}, {"Model": "Llama2-70b", "Internal (\u2191) ": 0.313, "External  (\u2191)": 0.721, "Hallucination  (\u2191)": 0.402, "Persona Sycophancy  (\u2193)": 0.043, "Preference Sycophancy  (\u2193)": 0.468, "Adv Factuality  (\u2191)": 0.794}, {"Model": "Llama2-13b", "Internal (\u2191) ": 0.235, "External  (\u2191)": 0.722, "Hallucination  (\u2191)": 0.404, "Persona Sycophancy  (\u2193)": 0.032, "Preference Sycophancy  (\u2193)": 0.571, "Adv Factuality  (\u2191)": 0.78}, {"Model": "Llama2-7b", "Internal (\u2191) ": 0.203, "External  (\u2191)": 0.638, "Hallucination  (\u2191)": 0.396, "Persona Sycophancy  (\u2193)": 0.035, "Preference Sycophancy  (\u2193)": 0.587, "Adv Factuality  (\u2191)": 0.718}, {"Model": "Wizardlm-13b", "Internal (\u2191) ": 0.19, "External  (\u2191)": 0.574, "Hallucination  (\u2191)": 0.356, "Persona Sycophancy  (\u2193)": 0.025, "Preference Sycophancy  (\u2193)": 0.385, "Adv Factuality  (\u2191)": 0.794}, {"Model": "Koala-13b", "Internal (\u2191) ": 0.145, "External  (\u2191)": 0.553, "Hallucination  (\u2191)": 0.451, "Persona Sycophancy  (\u2193)": 0.04, "Preference Sycophancy  (\u2193)": 0.5, "Adv Factuality  (\u2191)": 0.435}, {"Model": "Baichuan-13b", "Internal (\u2191) ": 0.17, "External  (\u2191)": 0.622, "Hallucination  (\u2191)": 0.306, "Persona Sycophancy  (\u2193)": 0.032, "Preference Sycophancy  (\u2193)": 0.286, "Adv Factuality  (\u2191)": 0.44}, {"Model": "Oasst-12b", "Internal (\u2191) ": 0.101, "External  (\u2191)": 0.534, "Hallucination  (\u2191)": 0.418, "Persona Sycophancy  (\u2193)": 0.031, "Preference Sycophancy  (\u2193)": 0.436, "Adv Factuality  (\u2191)": 0.221}, {"Model": "ERNIE", "Internal (\u2191) ": 0.255, "External  (\u2191)": 0.689, "Hallucination  (\u2191)": 0.515, "Persona Sycophancy  (\u2193)": 0.019, "Preference Sycophancy  (\u2193)": 0.312, "Adv Factuality  (\u2191)": 0.407}, {"Model": "Mistral-7b", "Internal (\u2191) ": 0.341, "External  (\u2191)": 0.687, "Hallucination  (\u2191)": 0.458, "Persona Sycophancy  (\u2193)": 0.035, "Preference Sycophancy  (\u2193)": 0.293, "Adv Factuality  (\u2191)": 0.426}, {"Model": "PaLM2", "Internal (\u2191) ": 0.284, "External  (\u2191)": 0.532, "Hallucination  (\u2191)": 0.379, "Persona Sycophancy  (\u2193)": 0.028, "Preference Sycophancy  (\u2193)": 0.581, "Adv Factuality  (\u2191)": 0.273}]
 robustness=[{"Model": "Baichuan-13b", "AdvGlue RS (\u2191)": 0.363, "AdvInstruction (\u2191)": 93.99, "OOD detection (\u2191)": 0.004, "OOD generalization (\u2191)": 0.539}, {"Model": "ChatGLM2", "AdvGlue RS (\u2191)": 0.254, "AdvInstruction (\u2191)": 94.37, "OOD detection (\u2191)": 0.627, "OOD generalization (\u2191)": 0.778}, {"Model": "Vicuna-13b", "AdvGlue RS (\u2191)": 0.18, "AdvInstruction (\u2191)": 96.01, "OOD detection (\u2191)": 0.635, "OOD generalization (\u2191)": 0.839}, {"Model": "Vicuna-7b", "AdvGlue RS (\u2191)": 0.072, "AdvInstruction (\u2191)": 88.77, "OOD detection (\u2191)": 0.49, "OOD generalization (\u2191)": 0.753}, {"Model": "Vicuna-33b", "AdvGlue RS (\u2191)": 0.219, "AdvInstruction (\u2191)": 95.97, "OOD detection (\u2191)": 0.685, "OOD generalization (\u2191)": 0.785}, {"Model": "Llama2-7b", "AdvGlue RS (\u2191)": 0.374, "AdvInstruction (\u2191)": 96.68, "OOD detection (\u2191)": 0.465, "OOD generalization (\u2191)": 0.777}, {"Model": "Llama2-13b", "AdvGlue RS (\u2191)": 0.306, "AdvInstruction (\u2191)": 96.48, "OOD detection (\u2191)": 0.432, "OOD generalization (\u2191)": 0.884}, {"Model": "Koala-13b", "AdvGlue RS (\u2191)": 0.116, "AdvInstruction (\u2191)": 94.05, "OOD detection (\u2191)": 0.552, "OOD generalization (\u2191)": 0.584}, {"Model": "Oasst-12b", "AdvGlue RS (\u2191)": 0.143, "AdvInstruction (\u2191)": 93.68, "OOD detection (\u2191)": 0.398, "OOD generalization (\u2191)": 0.883}, {"Model": "Wizardlm-13b", "AdvGlue RS (\u2191)": 0.152, "AdvInstruction (\u2191)": 95.02, "OOD detection (\u2191)": 0.643, "OOD generalization (\u2191)": 0.871}, {"Model": "ERNIE", "AdvGlue RS (\u2191)": 0.408, "AdvInstruction (\u2191)": 90.99, "OOD detection (\u2191)": 0.548, "OOD generalization (\u2191)": 0.795}, {"Model": "ChatGPT", "AdvGlue RS (\u2191)": 0.326, "AdvInstruction (\u2191)": 97.42, "OOD detection (\u2191)": 0.697, "OOD generalization (\u2191)": 0.867}, {"Model": "GPT-4", "AdvGlue RS (\u2191)": 0.591, "AdvInstruction (\u2191)": 96.36, "OOD detection (\u2191)": 0.805, "OOD generalization (\u2191)": 0.923}, {"Model": "Llama2-70b", "AdvGlue RS (\u2191)": 0.471, "AdvInstruction (\u2191)": 97.64, "OOD detection (\u2191)": 0.461, "OOD generalization (\u2191)": 0.873}, {"Model": "Mistral-7b", "AdvGlue RS (\u2191)": 0.331, "AdvInstruction (\u2191)": 95.76, "OOD detection (\u2191)": 0.407, "OOD generalization (\u2191)": 0.822}, {"Model": "PaLM 2", "AdvGlue RS (\u2191)": 0.607, "AdvInstruction (\u2191)": 95.41, "OOD detection (\u2191)": 0.104, "OOD generalization (\u2191)": 0.822}]
