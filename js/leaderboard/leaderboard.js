@@ -69,13 +69,9 @@ let generateTable = (data, tableId) => {
 
 // 当文档加载完成时，生成表格
 document.addEventListener('DOMContentLoaded', () => {
-    generateTable(robustness, "table_robustness");
-    generateTable(privacy, "table_privacy");
-    generateTable(safety, "table_safety");
-    generateTable(ethics, "table_ethics");
-    generateTable(truthfulness, "table_truthfulness");
-    generateTable(fairness, "table_fairness");
-
-
+    generateTable(score, "table_score");
+    generateTable(pairwtie, "table_pairwtie");
+    generateTable(pairwotie, "table_pairwotie");
+    generateTable(batch, "table_batch");
     
 });
