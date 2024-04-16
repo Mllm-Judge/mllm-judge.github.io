@@ -81,9 +81,22 @@
             </div>
             <div class="description">
               <p><ol>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li><b>Scoring Evaluation: </b>GPT-4V demonstrated the highest similarity to human scoring with a similarity score of 0.557. 
+                  In contrast, Gemini achieved only 0.332, with LLaVA and CogVLM scoring even lower.
+                  This discrepancy is primarily due to Gemini’s tendency to assign scores around 4 points, seldom giving 1 or 2 points. 
+                  LLaVA and CogVLM show a similar pattern to Gemini, predominantly assigning scores around 4 points. 
+                  We attribute this to a ‘High-Score’ Bias, akin to the ‘Yes/No’ bias, 
+                  which may result from an imbalance in positive and negative judging instructions in their training data, 
+                  severely limits their ability to provide just and varied scores in scoring settings. 
+                  In comparison, GPT-4V’s scores are more evenly distributed and align closely with human preferences.</li>
+                <li><b>Pair Comparison: </b>GPT-4V outshines other MLLMs in pair comparison tasks, achieving 0.683 in tie settings and 0.806 in non-tie settings, 
+                  surpassing 0.8 in many datasets, which indicate a strong alignment with human preferences. 
+                  Gemini, LLaVA, and CogVLM show a marked preference for declaring a clear winner, possibly due to a lack of tie situations in their training, leading to biased judgments. 
+                  It’s also interesting that the frequency of ties given by GPT-4V closely mirrors that of human judges, suggesting similar thresholds for tie decisions.</li>
+                <li><b>Batch Ranking: </b> GPT-4V aligns more closely with human ranking results, indicating a significant lead with a mean Levenshtein Distance of 0.313. 
+                  However, there is still substantial room for improvement in this task for all MLLMs. Notably, CogVLM is unable to provide a full ranking in this context, 
+                  offering only the top choice; so it was excluded from this comparison; LLaVA also exhibits position bias influenced by prompt structure, 
+                  often replicating judgments seen in example prompts, which complicates its ability to produce fair judgments.</li>
               </ol></p>
             </div>
           </div>
@@ -95,7 +108,14 @@
             </div>
             <div class="description">
               <p>
-                  To be continue...
+                To be a reliable judge, consistent decision-making across repeated evaluations 
+                of the same query is crucial. For this purpose, we conducted six repeated tests
+                with MLLM judgments and calculated the weighted average consistency scores and 
+                Majority Consistency Criterion ratios for GPT-4V and Gemini. 
+                Despite a higher temperature setting, GPT-4V substantially outperforms Gemini across all tasks. 
+                Particularly in Pair Comparison, GPT-4V achieves a higher consistency score of 0.675, 
+                but it encounters difficulties in maintaining similar levels of consistency in Scoring and Batch Ranking tasks, 
+                with scores dropping to 0.611 and 0.418, indicating the challenge of producing qualified and convincing judgments.
               </p>
             </div>
           </div>
@@ -107,8 +127,12 @@
             </div>
             <div class="description">
               <p>
-                To be continue...
-
+                We explore the feasibility of using LLMs for judging textbased responses without directly analyzing the original images. 
+                This involves two approaches: omitting vision information entirely and providing a detailed description of the picture. 
+                Surprisingly, we find that LLMs’ performance in multimodal judging tasks significantly improved with picture descriptions, 
+                achieving a Pearson similarity of 0.435 in Scoring Evaluation tasks, markedly outperformed judgments made without any vision
+                perception. Notably, in non-tie Pair Comparison, MLLMs with detailed vision descriptions even exceed the standard performance of MLLMs in judging. 
+                This suggests that MLLMs may lack certain human-like judging capabilities, while LLMs can effectively judge multimodal tasks when provided with comprehensive task-related descriptions.
               </p>
             </div>
           </div>
@@ -121,7 +145,21 @@
               <h2>Human Agreement</h2>
             </div>
             <div class="description">
-              <p>To be continue...</p>
+              <p>Our manual evaluation of MLLMs in judging, focusing on agreement and scoring, revealed notable findings. 
+                GPT-4V achieved around 70% human agreement across all settings, excelling in the Pair Comparison task with 79.3% agreement. 
+                Specifically, GPT-4V reached 78% in human agreement for Pair Comparison, with Gemini close at 72%, indicating strong performance 
+                in most sample pairs and supporting the idea that large models excel in pairwise distinctions (Zheng et al., 2023b), though improvements 
+                are needed in other judging settings. 
+                
+                In the Scoring Evaluation task, GPT-4V achieved a 70% human agreement rate, peaking at 79.9% in MS-COCO, 
+                while Gemini maintained an average rate of 67.7%. To assess the consistency of MLLM judging quality across multiple responses to a single 
+                image-instruction pair, we employed the Mean Absolute Deviation (MAD) metric. This measures the average absolute variance between individual scores 
+                and the mean, thereby gauging quality variability. Figure 16 demonstrates that GPT-4V exhibits lower variation in quality assessments, 
+                indicating more consistent and reliable judgment compared to Gemini, which is further evidenced by its superior performance. 
+
+                However, in Batch Ranking, both models showed reduced human performance. GPT-4V managed 69% human agreement, and Gemini only 47%. 
+                Additionally, their analyses received lower scores, especially in complex tasks like Math and graphics information. 
+                This suggests that the models’ inherent capabilities may not fully support understanding and completing intricate user instructions to provide accurate judgments.</p>
 
             </div>
           </div>
@@ -138,10 +176,16 @@
 
             <div class="featurecard">
               <h2>Egocentric Bias</h2>
-
+              
             </div>
             <div class="description">
-              <p>To be continue...</p>
+              <p>It means models assign higher scores to their own responses while scoring others lower. GPT-4V exhibits a slight degree of Egocentricity. 
+                This bias contrasts with Gemini, which tends to judge each response more equitably, displaying a similar scoring distribution across different sources. 
+                Further investigation into the rationale behind GPT-4V’s self-favoring behavior indicated that its judgments align closely with its own ethical guidelines. 
+                For instance, when faced with questions involving user privacy, GPT-4V’s responses typically emphasize privacy preservation and refuse to engage, 
+                leading to higher self-scoring in these scenarios. Despite efforts in prompt engineering to encourage impartiality, 
+                these models inherently rely on their built-in judgment criteria retained from post-alignment, which can lead to a divergence from human preferences. 
+                Such a discrepancy highlights the complexity of aligning MLLM judgments with human standards.</p>
             </div>
           </div>
           <div class="feature">
@@ -153,7 +197,14 @@
 
             </div>
             <div class="description">
-              <p>To be continue...</p>
+              <p>It means a model consistently favors answers in specific positions, often influenced by training data that typically places 
+                correct responses at the beginning or end of prompts. Figure 4 illustrates this bias in LLaVA and CogVLM, 
+                showing a distinct preference for one particular option in Pair Comparison tasks, habitually selecting the answer in their favored position. 
+                Such bias might arise from their restricted instruction-following capabilities, making their judgments disproportionately influenced by the 
+                structure of prompts. For example, when a Batch Ranking prompt includes a sample answer sequence like ‘ABCD’, LLaVA tends to replicate this 
+                sequence in its responses with a high frequency of 88.2%, significantly more than other sequences. However, introducing multiple examples in 
+                the prompt appears to lessen this bias, as evidenced by a reduced Position Bias score of 53.3% when two examples are provided. 
+                This suggests that augmenting prompts with more examples might help guide these models to adhere more closely to the given instructions.</p>
               
             </div>
           </div>
@@ -167,7 +218,14 @@
             </div>
 
             <div class="description">
-              <p>To be continue...</p>
+              <p>Length bias means models prefer longer answers over concise but correct ones, 
+                also known as verbosity bias (Zheng et al., 2023b). As illustrated in Figure 6, 
+                both GPT-4V and Gemini are inclined to award higher scores and preference to longer content. 
+                To delve deeper into this bias, we conducted an expanded scoring experiment using GPT-4, 
+                which lacks vision perception, to semantically increase the length of answers without altering their original meaning. 
+                As shown in Figure 7, the results showed a noticeable increase in the scores assigned by GPT-4V and Gemini, averaging gains of 
+                0.6 and 0.75 points, respectively. This finding conclusively demonstrates the presence of Verbosity Bias, suggesting that MLLMs 
+                might exploit extended text as a backdoor method to achieve higher scores.</p>
               
             </div>
           </div>
@@ -179,7 +237,13 @@
 
             </div>
             <div class="description">
-              <p>To be continue...</p>
+              <p>We observe a higher incidence of hallucinations in Batch Ranking tasks compared to Pair Comparison and Score Evaluation, 
+                which may stem from misunderstandings of the long-term context. Delving deeper, we encounter more severe language hallucinations, 
+                including miscomprehensions of textual meanings or errors in text retrieval, which significantly impact the accuracy and reliability
+                of the final judgments. To mitigate hallucination, we perform multi-step CoT on MLLM-AS-A-JUDGE-HARD by telling MLLMs to judge step-by-step, 
+                perform extra reasoning steps before normal “Analyze-then-Judge” setting, following: 1) imageinstruction 2) image 3) instruction. 
+                As shown in Table 6 in paper, hallucinations are mitigated across all settings, with extra reasoning on image information showing the most notable improvement in both score and pair tasks. 
+                Notably, in the Batch Ranking task, which involves analyzing longer texts, more reasoning steps significantly reduce hallucinations.</p>
 
             </div>
           </div>
@@ -305,7 +369,7 @@
                   </tr>
                   <tr>
                     <td data-title="Model">Qwen-VL-Chat</td>
-                    <td data-title="Model Size">7b</td>
+                    <td data-title="Model Size">9.6b</td>
                                         <td data-title="Open-Weight"><span class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
                       Yes
                     </span>
