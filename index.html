@@ -1,108 +1,2208 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
-  <title>MLLM-as-a-Judge Benchmark</title>
-  <link rel="icon" href="img/mllm-logo.png" type="image/icon type">
-  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="/dist/output.css" rel="stylesheet">
-  <link href="css/frame.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="css/controls.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="css/custom.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="js/menu.js"></script>
-  <script src="js/footer.js"></script>
-  <script src="js/index.js"></script>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="MLLM-as-a-Judge: Assessing Multimodal LLM-as-a-Judge with Vision-Language Benchmark">
+  <meta name="keywords" content="Multimodal, MLLM, LLM-as-a-Judge, Benchmark, Dataset, Vision-Language">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MLLM-as-a-Judge: Assessing Multimodal LLM-as-a-Judge with Vision-Language Benchmark</title>
+  <script type="module" src="https://md-block.verou.me/md-block.js"></script>
 
-  <style>
 
-  </style>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./img/gui-logo.jpg">
+
+  <link rel="stylesheet" href="./stylesheets/layout.css">
+  <link rel="stylesheet" href="./stylesheets/index.css">
+  <link rel="stylesheet" href="./bowe_componets/css/bootstrap.table.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <link href="./static/css/controls.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="./static/css/custom.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
-
-
-
-
 
 <body>
 
-  <div class="menu-container"></div>
-<div class="fullscreen-background">
-  <img src="img/website-background_00.png"> <!-- 更改为你的图片路径 -->
-  <div class="gradient-text"> MLLM-as-a-Judge: Assessing Multimodal LLM-as-a-Judge with Vision-Language Benchmark</div>
-</div>
-  <div id="body">
-  <div class="content-container">
-    <div class="content">
-      <div class="content-table flex-column">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" href="https://dongping-chen.github.io/">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
 
-        <h1 class="supportTitle">Introduction</h1>
-        <br>
-        <hr>
-        <div class="arch">
-          <img src="img//mllm-pipeline.png" class="title-icon2" alt="Rank Card">
-        </div>
-        <div class="flex-row">
-          <div class="flex-item flex-item-stretch-4 flex-column">
-            <p class="text">
-              In this work, we introduce MLLM-as-a-Judge which thoroughly explores three types of Multimodal LLM-as-a-Judge in Vision-Language settings. Specifically, there are three-fold major contributions:
-              <ol>
-                <li><b>A Benchmark.</b> We are the first to develop a comprehensive benchmark MLLM-AS-A-JUDGE in multimodal domains, with human annotations to assess the judging capability of MLLMs in tasks of Scoring Evaluation, Pair Comparison and Batch Ranking. </li>
-                <li><b>Two Datasets.</b> We curate two human preference datasets with high-quality questions MLLM-AS-A-JUDGE-HQ and MLLM-AS-A-JUDGE-HARD dataset with hallucination instances. They can serve as a rigorous testing ground to facilitate the development of MLLMs. </li>
-                <li><b>Findings and Implications.</b> Our evaluation of mainstream MLLMs reveals that while MLLMs exhibit alignment with human judgments in pair comparison tasks, notable discrepancies can be found in scoring evaluation and batch ranking. Furthermore, our findings reveal that MLLMs exhibit a range of biases and hallucinations, along with inconsistent judgments during the evaluation process, representing significant hurdles in establishing MLLMs as reliable judges.</li>
-              </ol>
-            </p>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://gui-world.github.io">
+              GUI-World
+            </a>
+            <a class="navbar-item" href="https://trustllmbenchmark.github.io/TrustLLM-Website/">
+              TrustLLM
+            </a>
+            <a class="navbar-item" href="https://unigen-framework.github.io/">
+              UniGen
+            </a>
+            <a class="navbar-item" href="https://github.com/Flossiee/HonestyLLM">
+              HonestyLLM
+            </a>
+            <a class="navbar-item" href="https://llm-coauthor.github.io/">
+              LLM-as-a-Coauthor
+            </a>
           </div>
         </div>
-        <h1 class="supportTitle">Takeaway</h1>
-        <br>
-        <hr>
-        <div class="flex-row">
-          <div class="flex-item flex-item-stretch-4 flex-column">
-            <p class="text">
-              While the MLLM (e.g., LLaVA and GPT-4V) demonstrates superior performance in certain datasets and inferior performance in others, 
-              we wish to underscore that our MLLM-as-a-Judge method leads to a solid conclusion: <b></b>GPT-4V consistently outperforms the baseline 
-              across diverse datasets on average. However, it remains noteworthy that GPT-4V does not entirely supplant human judges in particular 
-              datasets, as elaborated in Section 4.1 of our paper. This overarching perspective on benchmarking MLLM-as-a-Judge underscores the 
-              central focus of our study, which aims to assess MLLM performance from a comprehensive standpoint rather than evaluating individual 
-              MLLM performance on specific datasets.</b>
-            </p>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              MLLM-as-a-Judge: Assessing Multimodal LLM-as-a-Judge with Vision-Language Benchmark
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="https://dongping-chen.github.io/">Dongping
+                  Chen</a><sup style="color:#ec8bfd;">1</sup><sup style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block"><a href="https://dipsy0830.github.io/">Ruoxi Chen</a><sup
+                  style="color:#2bff32;">2</sup><sup style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block">Shilin Zhang<sup style="color:#ec8bfd;">1</sup><sup
+                  style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block">Yaochen Wang<sup style="color:#ec8bfd;">1</sup><sup
+                  style="color:#ff2b67;">*</sup>,</span>
+              <span class="author-block">Yinuo Liu<sup style="color:#ec8bfd;">1</sup>,</span>
+              <span class="author-block"><a href="https://huichizhou.github.io/">Huichi Zhou</a><sup
+                  style="color:#ec8bfd;">1</sup>,</span>
+              <span class="author-block"><a href="https://mask-hui.github.io/">Qihui Zhang</a><sup
+                  style="color:#ec8bfd;">1</sup>,</span>
+              <span class="author-block"><a href="http://wanyao.me/"><b>Yao Wan</b></a><sup
+                  style="color:#ec8bfd;">1</sup><sup style="color:#c9892e;">†</sup>,</span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=cTpFPJgAAAAJ&hl=en"><b>Pan
+                    Zhou</b></a><sup style="color:#ec8bfd;">1</sup><sup style="color:#c9892e;">†</sup>,</span>
+              <span class="author-block"><a href="https://lichao-sun.github.io/"><b>Lichao Sun</b></a><sup
+                  style="color:#66f1fb;">3</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup style="color:#ec8bfd;">1</sup>Huazhong University of Science and
+                Technology,</span>
+              <br>
+              <span class="author-block"><sup style="color:#2bff32;">2</sup>Zhejiang University of Technology,</span>
+              <span class="author-block"><sup style="color:#66f1fb;">3</sup>Lehigh University</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><a href="mailto:dongpingchen0612@gmail.com">dongpingchen0612@gmail.com</a>, {<a
+                  href="mailto:yaowan1992@gmail.com">yaowan1992</a>, <a
+                  href="mailto:panzhou@hust.edu.cn">panzhou</a>}@hust.edu.cn</span>
+            </div>
+
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <!--                <span class="link-block">-->
+                <!--                  <a href="https://arxiv.org/pdf/2011.12948" class="external-link button is-normal is-rounded is-dark">-->
+                <!--                    <span class="icon">-->
+                <!--                      <i class="fas fa-file-pdf"></i>-->
+                <!--                    </span>-->
+                <!--                    <span>Paper</span>-->
+                <!--                  </a>-->
+                <!--                </span>-->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2402.04788" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <!--                <span class="link-block">-->
+                <!--                  <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"-->
+                <!--                    class="external-link button is-normal is-rounded is-dark">-->
+                <!--                    <span class="icon">-->
+                <!--                      <i class="fab fa-youtube"></i>-->
+                <!--                    </span>-->
+                <!--                    <span>Video</span>-->
+                <!--                  </a>-->
+                <!--                </span>-->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/Dongping-Chen/MLLM-Judge"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/shuaishuaicdp/MLLM-Judge"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-images"></i>
+                    </span>
+                    <span>Data</span>
+                  </a>
+                </span>
+                <!-- Data Viewer. -->
+                <!-- <span class="link-block">
+                  <a href="https://huggingface.co/shuaishuaicdp/GUI-Vid" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fa fa-desktop"></i>
+                    </span>
+                    <span>Model</span>
+                  </a>
+                </span> -->
+                <!-- Slides Link. -->
+                <span class="link-block">
+                  <a href="https://mllm-judge.github.io/leaderboard.html" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-google"></i>
+                    </span>
+                    <span>Leaderboard</span>
+                  </a>
+                </span>
+                <!-- Twitter Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://twitter.com/TianbaoX/status/1778781521253667267" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-twitter"></i>
+                    </span>
+                    <span>Twitter</span>
+                  </a>
+                </span> -->
+                <!-- Discord Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://discord.gg/4Gnw7eTEZR" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-discord"></i>
+                    </span>
+                    <span>Discord</span>
+                  </a>
+                </span> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <section class="section">
+    <div class="container is-max-desktop">
+      <div class="column is-full">
+        <video controls muted loop autoplay width="100%">
+          <source src="static/videos/main.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Main Figure. -->
+      <h2 class="title is-3"></h2>
+      <div class="content has-text-justified">
+        <img src="img/mllm-pipeline.png" width="100%" alt="GUI-world Overview" class="responsive-image">
+        <img src="img/mllm-radar.png" width="100%" alt="GUI-world Benchmark Overview" class="responsive-image">
+        <md-block>
+          In this work, we introduce MLLM-as-a-Judge which thoroughly explores three types of Multimodal LLM-as-a-Judge
+          in Vision-Language settings. Specifically, there are three-fold major contributions:
+          <ol>
+            <li><b>A Benchmark.</b> We are the first to develop a comprehensive benchmark MLLM-AS-A-JUDGE in multimodal
+              domains, with human annotations to assess the judging capability of MLLMs in tasks of Scoring Evaluation,
+              Pair Comparison and Batch Ranking. </li>
+            <li><b>Two Datasets.</b> We curate two human preference datasets with high-quality questions
+              MLLM-AS-A-JUDGE-HQ and MLLM-AS-A-JUDGE-HARD dataset with hallucination instances. They can serve as a
+              rigorous testing ground to facilitate the development of MLLMs. </li>
+            <li><b>Findings and Implications.</b> Our evaluation of mainstream MLLMs reveals that while MLLMs exhibit
+              alignment with human judgments in pair comparison tasks, notable discrepancies can be found in scoring
+              evaluation and batch ranking. Furthermore, our findings reveal that MLLMs exhibit a range of biases and
+              hallucinations, along with inconsistent judgments during the evaluation process, representing significant
+              hurdles in establishing MLLMs as reliable judges.</li>
+          </ol>
+        </md-block>
+      </div>
+      <!--/ Main Figure. -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-wdith">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <md-block>
+              Multimodal Large Language Models (MLLMs) have gained significant attention recently, showing remarkable
+              potential in artificial general intelligence. However, assessing the utility of MLLMs presents
+              considerable challenges, primarily due to the absence of multimodal benchmarks that align with human
+              preferences. Drawing inspiration from the concept of LLM-as-a-Judge within LLMs, this paper introduces a
+              novel benchmark, termed MLLM-as-a-Judge, to assess the ability of MLLMs in assisting judges across diverse
+              modalities, encompassing three distinct tasks: *Scoring Evaluation*, *Pair Comparison*, and *Batch
+              Ranking*. Our
+              study reveals that, while MLLMs demonstrate remarkable human-like discernment in *Pair Comparison*, there
+              is
+              a significant divergence from human preferences in *Scoring Evaluation* and *Batch Ranking*. Furthermore,
+              a
+              closer examination reveals persistent challenges in the judgment capacities of LLMs, including diverse
+              biases, hallucinatory responses, and inconsistencies in judgment, even in advanced models such as GPT-4V.
+              These findings emphasize the pressing need for enhancements and further research efforts to be undertaken
+              before regarding MLLMs as fully reliable evaluators. In light of this, we advocate for additional efforts
+              dedicated to supporting the continuous development within the domain of MLLM functioning as judges.
+            </md-block>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-wdith">
+          <h2 class="title is-3">Takeaway</h2>
+          <div class="content has-text-justified">
+            <md-block>
+              While the MLLM (e.g., LLaVA and GPT-4V) demonstrates superior performance in certain datasets and inferior
+              performance in others,
+              we wish to underscore that our **MLLM-as-a-Judge** method leads to a solid conclusion: GPT-4V consistently
+              outperforms the baseline
+              across diverse datasets on average. However, it remains noteworthy that GPT-4V does not entirely supplant
+              human judges in particular
+              datasets, as elaborated in Section 4.1 of our paper. This overarching perspective on benchmarking
+              **MLLM-as-a-Judge** underscores the
+              central focus of our study, which aims to assess MLLM performance from a comprehensive standpoint rather
+              than evaluating individual
+              MLLM performance on specific datasets.
+            </md-block>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+    </div>
+  </section>
+
+  <section>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-wdith">
+          <h2 class="title is-3">Experiment Setups</h2>
+          <div class="content has-text-justified">
+            <ol>
+              <li><b>Models.</b> We evaluate the judging performance of eleven leading
+                MLLMs – GPT-4V, Gemini-Pro-Vision-1.0, LLaVA-1.5-13b, LLaVA-1.6-
+                7b/13b/34b, Qwen-VL-Plus/Max and CogVLM – across
+                three distinct evaluation settings. Adapting the “Analyze-then-Judge” paradigm, which
+                is a one-step CoT approach, we first ask
+                MLLMs to analyze responses and then provide a judgment
+                based on their analysis. </li>
+              <li><b>Metrics.</b> After collecting responses from MLLM judgments, we quantify their alignment with human
+                annotations across three
+                settings, employing distinct metrics as follows:
+                <ul>
+                  <li><b>Scoring Evaluation:</b> Following LLM-as-a-Judge , we compute the Pearson similarity between
+                    the MLLMs’ judgments and human ratings across different sub-datasets.</li>
+                  <li><b>Pair Comparison:</b> We assess the similarity between the
+                    MLLM judgments and human decisions using accuracy,
+                    F1-score, and recall to assess the judging abilities of models.</li>
+
+                  <li><b>Batch Evaluation:</b> We consolidate the ranking results into
+                    a singular sequence and employ the Normalized Levenshtein
+                    distance to evaluate the similarity
+                    between judgments from MLLMs and human annotation.</li>
+                </ul>
+              <li>Apart from traditional metrics for similarity assessment
+                between judgments from MLLMs and humans, we further
+                evaluate the judgments provided by MLLMs to uncover
+                latent bias and hallucination in 10 datasets. We also invite
+                human annotators for further validation, focusing on the
+                following aspects:
+                <ul>
+                  <li><b>Human Agreement:</b> This involves a simple ‘yes’ or ‘no’
+                    response to assess agreement with the MLLM judgments.
+                    While some judgments might appear reasonable, they may
+                    still be considered incorrect due to unique human perspectives. Hence, we conduct experiments on
+                    human agreement
+                    to address situations that traditional metrics may not adequately capture.</li>
+                  <li><b>Analysis Grading:</b> Each MLLM analysis is assigned a
+                    score from 1 to 5, considering relevance, accuracy, creativity,
+                    and response granularity, detailed in Appendix F.
+                  <li><b>Hallucination Detection:</b> Given the propensity for hallucination issues in the complex
+                    reasoning chains and longterm vision-language contexts of MLLMs, we task human
+                    annotators with identifying any hallucinations in the analyses of MLLM judgments, adhering to
+                    established definitions
+                    of vision and language hallucination.
+                </ul>
+              </li>
+            </ol>
           </div>
         </div>
 
-        <h1 class="supportTitle">Empirical Findings</h1>
-        <br>
 
-        <h2 class="supportTitle2">Overall Assessments</h2>
+      </div>
+    </div>
+  </section>
+  <div class="cover" id="contentCover">
+    <!-- Baseline. -->
+    <div class="container-t">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="infoCard">
+            <div class="infoBody">
+              <div class="tabs is-centered example_lst">
+                <ul>
+                  <li class="is-active"><a title="Overall (Main)">Overall (Main)</a></li>
+                  <li><a title="Human Agreement">Human Agreement</a></li>
+                  <li><a title="3-step COT v.s. Directly">3-step COT v.s. Directly</a></li>
+                  <li><a title="w./w.o. Vision">w./w.o. Vision</a></li>
+                  <li><a title="Overall (Full)">Overall (Full)</a></li>
+                </ul>
 
+              </div>
+              <script type="text/javascript">
+                document.querySelectorAll(".example_lst li").forEach(e => {
+                  e.addEventListener("click", Click_1)
+                })
+
+                function Click_1(eve) {
+                  const iTxt = eve.srcElement.innerText
+                  for (let v of document.querySelectorAll(".example_lst a")) {
+                    if (iTxt === v.innerText) {
+                      v.parentElement.className = "is-active";
+                    } else {
+                      v.parentElement.className = "";
+                    }
+                  }
+                  for (let block of document.getElementsByClassName('lib_examples')) {
+                    block.style.display = (block.title === iTxt) ? 'block' : 'none';
+                  }
+                }
+
+              </script>
+              <div title="Overall (Main)" class="lib_examples" id="BoardPanel1" style="display: none;">
+                <!-- <div class="content has-text-justified"> -->
+                <md-block>
+                  The overall performance of different MLLMs in judging, compared with human annotations on different
+                  datasets. We sample all
+                  the data three times and took the average to mitigate the casualty. w. and w.o. tie represents tie and
+                  non-tie situations respectively. We
+                  omit Gemini’s results on the diffusion task for its challenges in processing AI-generated images. All
+                  presented data of Pearson similarity
+                  exhibit a p-value below 0.05, indicating a statistically significant level of confidence.
+                </md-block>
+                <!-- </div> -->
+                <div class="table-container">
+                  <table>
+                    <tr>
+                      <th rowspan="2">Settings</th>
+                      <th rowspan="2">MLLM</th>
+                      <th colspan="14">Categories</th>
+                      <th rowspan="2">Ave.</th>
+                    </tr>
+                    <tr>
+                      <th>COCO</th>
+                      <th>C.C.</th>
+                      <th>Diff.</th>
+                      <th>Graphics</th>
+                      <th>Math</th>
+                      <th>Text</th>
+                      <th>WIT</th>
+                      <th>Chart</th>
+                      <th>VisIT</th>
+                      <th>CC-3M</th>
+                      <th>M2W</th>
+                      <th>SciQA</th>
+                      <th>Aes</th>
+                      <th>MM-Vet</th>
+                    </tr>
+                    <tr>
+                      <td rowspan="5">Score (↑)</td>
+                      <td>LLaVA-1.5-13b</td>
+                      <td>0.247</td>
+                      <td>0.227</td>
+                      <td>0.060</td>
+                      <td>0.242</td>
+                      <td>0.093</td>
+                      <td>0.245</td>
+                      <td>0.109</td>
+                      <td>0.237</td>
+                      <td>0.177</td>
+                      <td>0.071</td>
+                      <td>0.424</td>
+                      <td>0.279</td>
+                      <td>0.414</td>
+                      <td>0.322</td>
+                      <td>0.225</td>
+                    </tr>
+                    <tr>
+                      <td>LLaVA-1.6-34b</td>
+                      <td>0.285</td>
+                      <td>0.251</td>
+                      <td>-0.012</td>
+                      <td>0.262</td>
+                      <td>0.238</td>
+                      <td>0.258</td>
+                      <td>0.151</td>
+                      <td>0.318</td>
+                      <td>0.198</td>
+                      <td>0.109</td>
+                      <td>0.022</td>
+                      <td>0.206</td>
+                      <td>0.025</td>
+                      <td>0.265</td>
+                      <td>0.184</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini</td>
+                      <td>0.262</td>
+                      <td>0.408</td>
+                      <td>-</td>
+                      <td>0.400</td>
+                      <td>0.228</td>
+                      <td>0.222</td>
+                      <td>0.418</td>
+                      <td>0.343</td>
+                      <td>0.336</td>
+                      <td>0.374</td>
+                      <td>0.324</td>
+                      <td>0.073</td>
+                      <td>0.360</td>
+                      <td>0.207</td>
+                      <td>0.304</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.454</strong></td>
+                      <td><strong>0.507</strong></td>
+                      <td><strong>0.458</strong></td>
+                      <td><strong>0.645</strong></td>
+                      <td><strong>0.606</strong></td>
+                      <td><strong>0.624</strong></td>
+                      <td>0.579</td>
+                      <td><strong>0.645</strong></td>
+                      <td>0.620</td>
+                      <td>0.431</td>
+                      <td>0.185</td>
+                      <td>0.383</td>
+                      <td>0.401</td>
+                      <td>0.326</td>
+                      <td><strong>0.490</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-max</td>
+
+                      <td>0.311</td>
+                      <td>0.117</td>
+                      <td>0.072</td>
+                      <td>0.218</td>
+                      <td>0.175</td>
+                      <td>0.196</td>
+                      <td>0.028</td>
+                      <td>0.312</td>
+                      <td>0.151</td>
+                      <td>0.045</td>
+                      <td>0.244</td>
+                      <td>0.115</td>
+                      <td>0.177</td>
+                      <td>0.216</td>
+                      <td>0.170</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="5">Pair w. Tie (↑)</td>
+                      <td>LLaVA-1.5-13b</td>
+                      <td>0.273</td>
+                      <td>0.478</td>
+                      <td>0.286</td>
+                      <td>0.273</td>
+                      <td><strong>0.657</strong></td>
+                      <td>0.510</td>
+                      <td>0.369</td>
+                      <td>0.383</td>
+                      <td>0.456</td>
+                      <td>0.484</td>
+                      <td>0.347</td>
+                      <td>0.223</td>
+                      <td>0.389</td>
+                      <td>0.254</td>
+                      <td>0.384</td>
+                    </tr>
+                    <tr>
+                      <td>LLaVA-1.6-34b</td>
+                      <td>0.493</td>
+                      <td>0.600</td>
+                      <td>0.570</td>
+                      <td>0.300</td>
+                      <td>0.374</td>
+                      <td>0.551</td>
+                      <td>0.543</td>
+                      <td>0.254</td>
+                      <td>0.398</td>
+                      <td>0.392</td>
+                      <td>0.513</td>
+                      <td><strong>0.434</strong></td>
+                      <td>0.524</td>
+                      <td>0.499</td>
+                      <td>0.460</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini</td>
+                      <td>0.616</td>
+                      <td><strong>0.787</strong></td>
+                      <td>-</td>
+                      <td><strong>0.650</strong></td>
+                      <td>0.436</td>
+                      <td>0.664</td>
+                      <td>0.605</td>
+                      <td>0.500</td>
+                      <td>0.660</td>
+                      <td>0.560</td>
+                      <td>0.370</td>
+                      <td>0.262</td>
+                      <td>0.190</td>
+                      <td>0.312</td>
+                      <td>0.509</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.696</strong></td>
+                      <td><strong>0.824</strong></td>
+                      <td><strong>0.847</strong></td>
+                      <td>0.639</td>
+                      <td>0.564</td>
+                      <td><strong>0.673</strong></td>
+                      <td><strong>0.679</strong></td>
+                      <td><strong>0.657</strong></td>
+                      <td>0.640</td>
+                      <td>0.612</td>
+                      <td><strong>0.521</strong></td>
+                      <td>0.415</td>
+                      <td><strong>0.606</strong></td>
+                      <td><strong>0.529</strong></td>
+                      <td><strong>0.636</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-max</td>
+                      <td>0.403</td>
+                      <td>0.464</td>
+                      <td>0.372</td>
+                      <td>0.494</td>
+                      <td>0.438</td>
+                      <td>0.500</td>
+                      <td>0.533</td>
+                      <td>0.479</td>
+                      <td>0.421</td>
+                      <td>0.421</td>
+                      <td>0.411</td>
+                      <td>0.392</td>
+                      <td>0.325</td>
+                      <td>0.474</td>
+                      <td>0.438</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="5">Pair w.o. Tie (↑)</td>
+                      <td>LLaVA-1.5-13b</td>
+                      <td>0.327</td>
+                      <td>0.537</td>
+                      <td>0.302</td>
+                      <td>0.300</td>
+                      <td>0.726</td>
+                      <td>0.684</td>
+                      <td>0.600</td>
+                      <td>0.610</td>
+                      <td>0.648</td>
+                      <td>0.583</td>
+                      <td>0.449</td>
+                      <td>0.443</td>
+                      <td>0.498</td>
+                      <td>0.344</td>
+                      <td>0.504</td>
+                    </tr>
+                    <tr>
+                      <td>LLaVA-1.6-34b</td>
+                      <td>0.607</td>
+                      <td><strong>0.824</strong></td>
+                      <td><strong>0.855</strong></td>
+                      <td>0.402</td>
+                      <td>0.587</td>
+                      <td>0.750</td>
+                      <td><strong>0.758</strong></td>
+                      <td>0.381</td>
+                      <td>0.503</td>
+                      <td>0.564</td>
+                      <td><strong>0.712</strong></td>
+                      <td><strong>0.679</strong></td>
+                      <td>0.694</td>
+                      <td><strong>0.762</strong></td>
+                      <td>0.648</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini</td>
+                      <td>0.717</td>
+                      <td>0.840</td>
+                      <td>-</td>
+                      <td>0.770</td>
+                      <td>0.678</td>
+                      <td>0.793</td>
+                      <td>0.688</td>
+                      <td>0.658</td>
+                      <td>0.711</td>
+                      <td>0.652</td>
+                      <td>0.471</td>
+                      <td>0.358</td>
+                      <td>0.265</td>
+                      <td>0.400</td>
+                      <td>0.615</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.804</strong></td>
+                      <td><strong>0.870</strong></td>
+                      <td><strong>0.922</strong></td>
+                      <td><strong>0.807</strong></td>
+                      <td><strong>0.801</strong></td>
+                      <td><strong>0.805</strong></td>
+                      <td><strong>0.734</strong></td>
+                      <td><strong>0.849</strong></td>
+                      <td><strong>0.761</strong></td>
+                      <td><strong>0.703</strong></td>
+                      <td>0.699</td>
+                      <td>0.647</td>
+                      <td>0.755</td>
+                      <td><strong>0.659</strong></td>
+                      <td><strong>0.773</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-max</td>
+                      <td>0.657</td>
+                      <td>0.674</td>
+                      <td>0.556</td>
+                      <td>0.667</td>
+                      <td>0.635</td>
+                      <td>0.732</td>
+                      <td>0.647</td>
+                      <td>0.638</td>
+                      <td>0.560</td>
+                      <td>0.586</td>
+                      <td>0.608</td>
+                      <td>0.646</td>
+                      <td>0.741</td>
+                      <td>0.662</td>
+                      <td>0.644</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="5">Batch (↓)</td>
+                      <td>LLaVA-1.5-13b</td>
+                      <td>0.577</td>
+                      <td>0.492</td>
+                      <td>0.562</td>
+                      <td>0.535</td>
+                      <td>0.598</td>
+                      <td>0.650</td>
+                      <td>0.616</td>
+                      <td>0.644</td>
+                      <td>0.620</td>
+                      <td>0.563</td>
+                      <td>0.639</td>
+                      <td>0.563</td>
+                      <td>0.650</td>
+                      <td>0.652</td>
+                      <td>0.597</td>
+                    </tr>
+                    <tr>
+                      <td>LLaVA-1.6-34b</td>
+                      <td>0.449</td>
+                      <td>0.411</td>
+                      <td>0.500</td>
+                      <td>0.561</td>
+                      <td>0.575</td>
+                      <td>0.544</td>
+                      <td>0.483</td>
+                      <td>0.552</td>
+                      <td>0.542</td>
+                      <td>0.479</td>
+                      <td>0.529</td>
+                      <td>0.437</td>
+                      <td>0.500</td>
+                      <td>0.450</td>
+                      <td>0.501</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini</td>
+                      <td><strong>0.287</strong></td>
+                      <td><strong>0.299</strong></td>
+                      <td>-</td>
+                      <td>0.473</td>
+                      <td>0.462</td>
+                      <td>0.430</td>
+                      <td>0.344</td>
+                      <td>0.520</td>
+                      <td>0.426</td>
+                      <td>0.357</td>
+                      <td><strong>0.613</strong></td>
+                      <td><strong>0.412</strong></td>
+                      <td>0.467</td>
+                      <td>0.529</td>
+                      <td>0.432</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td>0.318</td>
+                      <td>0.353</td>
+                      <td>0.070</td>
+                      <td>0.385</td>
+                      <td>0.348</td>
+                      <td>0.319</td>
+                      <td>0.290</td>
+                      <td>0.347</td>
+                      <td>0.300</td>
+                      <td>0.402</td>
+                      <td>0.597</td>
+                      <td>0.462</td>
+                      <td>0.453</td>
+                      <td>0.411</td>
+                      <td>0.361</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-max</td>
+                      <td>0.477</td>
+                      <td>0.407</td>
+                      <td>0.500</td>
+                      <td>0.480</td>
+                      <td>0.507</td>
+                      <td>0.515</td>
+                      <td>0.493</td>
+                      <td>0.539</td>
+                      <td>0.468</td>
+                      <td>0.407</td>
+                      <td>0.563</td>
+                      <td>0.503</td>
+                      <td>0.444</td>
+                      <td>0.500</td>
+                      <td>0.486</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div title="Human Agreement" class="lib_examples" id="BoardPanel2" style="display: none;">
+                <!-- <div class="content has-text-justified"> -->
+                <md-block>
+                  Human agreement percentage on MLLM-as-a-Judge in 10 datasets. Each judgment is independently reviewed
+                  three times by
+                  different annotators and consensus results are recorded. Gemini failed in diffusion tasks and its
+                  results are omitted
+                </md-block>
+                <!-- </div> -->
+
+                <div class="table-container">
+                  <table>
+                    <tr>
+                      <th rowspan="2">Settings</th>
+                      <th rowspan="2">MLLM</th>
+                      <th colspan="10">Categories</th>
+                      <th rowspan="2">Average</th>
+                    </tr>
+                    <tr>
+                      <th>COCO</th>
+                      <th>C.C.</th>
+                      <th>Diffusion</th>
+                      <th>Graphics</th>
+                      <th>Math</th>
+                      <th>Text</th>
+                      <th>WIT</th>
+                      <th>Chart</th>
+                      <th>VisIT</th>
+                      <th>CC-3M</th>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">Score (↑)</td>
+                      <td>Gemini</td>
+                      <td>0.783</td>
+                      <td><strong>0.739</strong></td>
+                      <td>-</td>
+                      <td>0.618</td>
+                      <td>0.536</td>
+                      <td>0.621</td>
+                      <td><strong>0.749</strong></td>
+                      <td>0.630</td>
+                      <td>0.712</td>
+                      <td>0.702</td>
+                      <td>0.677</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.799</strong></td>
+                      <td>0.725</td>
+                      <td><strong>0.506</strong></td>
+                      <td><strong>0.688</strong></td>
+                      <td><strong>0.638</strong></td>
+                      <td><strong>0.706</strong></td>
+                      <td>0.714</td>
+                      <td><strong>0.676</strong></td>
+                      <td><strong>0.779</strong></td>
+                      <td><strong>0.754</strong></td>
+                      <td><strong>0.699</strong></td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">Pair (↑)</td>
+                      <td>Gemini</td>
+                      <td>0.705</td>
+                      <td>0.833</td>
+                      <td>-</td>
+                      <td>0.733</td>
+                      <td>0.520</td>
+                      <td>0.717</td>
+                      <td><strong>0.827</strong></td>
+                      <td>0.620</td>
+                      <td><strong>0.853</strong></td>
+                      <td>0.703</td>
+                      <td>0.724</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.821</strong></td>
+                      <td><strong>0.926</strong></td>
+                      <td><strong>0.873</strong></td>
+                      <td><strong>0.794</strong></td>
+                      <td><strong>0.618</strong></td>
+                      <td><strong>0.752</strong></td>
+                      <td>0.790</td>
+                      <td><strong>0.796</strong></td>
+                      <td>0.797</td>
+                      <td><strong>0.766</strong></td>
+                      <td><strong>0.793</strong></td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">Batch (↓)</td>
+                      <td>Gemini</td>
+                      <td>0.642</td>
+                      <td>0.639</td>
+                      <td>-</td>
+                      <td>0.333</td>
+                      <td>0.330</td>
+                      <td>0.473</td>
+                      <td>0.511</td>
+                      <td>0.315</td>
+                      <td>0.422</td>
+                      <td><strong>0.554</strong></td>
+                      <td>0.469</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.663</strong></td>
+                      <td>0.639</td>
+                      <td><strong>0.912</strong></td>
+                      <td><strong>0.536</strong></td>
+                      <td><strong>0.475</strong></td>
+                      <td><strong>0.615</strong></td>
+                      <td><strong>0.641</strong></td>
+                      <td><strong>0.640</strong></td>
+                      <td><strong>0.622</strong></td>
+                      <td>0.467</td>
+                      <td><strong>0.621</strong></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div title="3-step COT v.s. Directly" class="lib_examples" id="BoardPanel3" style="display: block;">
+
+                <!-- <div class="content has-text-justified"> -->
+                <md-block>
+                  Results of GPT-4V and Gemini-Pro acting as a judge with a 3-step CoT approach in a selected subset.
+                </md-block>
+                <!-- </div> -->
+
+                <div class="table-container">
+                  <table>
+                    <tr>
+                      <th rowspan="2">Settings</th>
+                      <th rowspan="2">MLLM</th>
+                      <th colspan="10">Categories</th>
+                      <th rowspan="2">Ave.</th>
+                    </tr>
+                    <tr>
+                      <th>COCO</th>
+                      <th>C.C.</th>
+                      <th>Diffusion</th>
+                      <th>Graphics</th>
+                      <th>Math</th>
+                      <th>Text</th>
+                      <th>WIT</th>
+                      <th>Chart</th>
+                      <th>VisIT</th>
+                      <th>CC-3M</th>
+                    </tr>
+                    <tr>
+                      <td rowspan="4">Score (↑)</td>
+                      <td>GPT-4V</td>
+                      <td><strong>0.454</strong></td>
+                      <td><strong>0.507</strong></td>
+                      <td><strong>0.458</strong></td>
+                      <td><strong>0.645</strong></td>
+                      <td><strong>0.606</strong></td>
+                      <td><strong>0.624</strong></td>
+                      <td><strong>0.579</strong></td>
+                      <td><strong>0.645</strong></td>
+                      <td><strong>0.620</strong></td>
+                      <td><strong>0.431</strong></td>
+                      <td><strong>0.557</strong></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V (+CoT)</td>
+                      <td>0.246</td>
+                      <td>0.165</td>
+                      <td>0.192</td>
+                      <td>0.385</td>
+                      <td>0.397</td>
+                      <td>0.400</td>
+                      <td>0.298</td>
+                      <td>0.443</td>
+                      <td>0.423</td>
+                      <td>0.038</td>
+                      <td>0.299</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini</td>
+                      <td>0.262</td>
+                      <td>0.408</td>
+                      <td>-</td>
+                      <td>0.400</td>
+                      <td>0.228</td>
+                      <td>0.222</td>
+                      <td>0.418</td>
+                      <td>0.343</td>
+                      <td>0.336</td>
+                      <td>0.374</td>
+                      <td>0.299</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini (+CoT)</td>
+                      <td>0.127</td>
+                      <td>0.068</td>
+                      <td>0.117</td>
+                      <td>0.220</td>
+                      <td>0.132</td>
+                      <td>0.182</td>
+                      <td>0.105</td>
+                      <td>0.140</td>
+                      <td>0.222</td>
+                      <td>0.128</td>
+                      <td>0.144</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="4">Pair w. Tie (↑)</td>
+                      <td>GPT-4V</td>
+                      <td><strong>0.696</strong></td>
+                      <td><strong>0.824</strong></td>
+                      <td><strong>0.847</strong></td>
+                      <td><strong>0.639</strong></td>
+                      <td><strong>0.564</strong></td>
+                      <td><strong>0.673</strong></td>
+                      <td><strong>0.679</strong></td>
+                      <td><strong>0.657</strong></td>
+                      <td><strong>0.640</strong></td>
+                      <td><strong>0.612</strong></td>
+                      <td><strong>0.683</strong></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V (+CoT)</td>
+                      <td>0.507</td>
+                      <td>0.657</td>
+                      <td>0.561</td>
+                      <td>0.601</td>
+                      <td>0.515</td>
+                      <td>0.580</td>
+                      <td>0.489</td>
+                      <td>0.521</td>
+                      <td>0.646</td>
+                      <td>0.553</td>
+                      <td>0.563</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini</td>
+                      <td>0.616</td>
+                      <td>0.787</td>
+                      <td>-</td>
+                      <td><strong>0.650</strong></td>
+                      <td>0.436</td>
+                      <td><strong>0.664</strong></td>
+                      <td>0.605</td>
+                      <td>0.500</td>
+                      <td><strong>0.660</strong></td>
+                      <td><strong>0.560</strong></td>
+                      <td>0.609</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini (+CoT)</td>
+                      <td>0.233</td>
+                      <td>0.239</td>
+                      <td>0.420</td>
+                      <td>0.207</td>
+                      <td>0.284</td>
+                      <td>0.329</td>
+                      <td>0.352</td>
+                      <td>0.357</td>
+                      <td>0.247</td>
+                      <td>0.239</td>
+                      <td>0.291</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="4">Pair w.o. Tie (↑)</td>
+                      <td>GPT-4V</td>
+                      <td><strong>0.804</strong></td>
+                      <td><strong>0.870</strong></td>
+                      <td><strong>0.922</strong></td>
+                      <td><strong>0.807</strong></td>
+                      <td><strong>0.801</strong></td>
+                      <td><strong>0.805</strong></td>
+                      <td><strong>0.734</strong></td>
+                      <td><strong>0.849</strong></td>
+                      <td><strong>0.761</strong></td>
+                      <td><strong>0.703</strong></td>
+                      <td><strong>0.806</strong></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V (+CoT)</td>
+                      <td>0.673</td>
+                      <td>0.821</td>
+                      <td>0.845</td>
+                      <td>0.707</td>
+                      <td>0.738</td>
+                      <td>0.787</td>
+                      <td>0.548</td>
+                      <td>0.756</td>
+                      <td>0.753</td>
+                      <td>0.654</td>
+                      <td>0.728</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini</td>
+                      <td>0.717</td>
+                      <td>0.840</td>
+                      <td>-</td>
+                      <td>0.770</td>
+                      <td>0.678</td>
+                      <td>0.793</td>
+                      <td>0.688</td>
+                      <td>0.658</td>
+                      <td>0.711</td>
+                      <td>0.652</td>
+                      <td>0.723</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini (+CoT)</td>
+                      <td>0.267</td>
+                      <td>0.275</td>
+                      <td>0.573</td>
+                      <td>0.264</td>
+                      <td>0.414</td>
+                      <td>0.424</td>
+                      <td>0.427</td>
+                      <td>0.511</td>
+                      <td>0.299</td>
+                      <td>0.319</td>
+                      <td>0.377</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="4">Batch (↓)</td>
+                      <td>GPT-4V</td>
+                      <td>0.323</td>
+                      <td>0.344</td>
+                      <td><strong>0.092</strong></td>
+                      <td>0.401</td>
+                      <td>0.367</td>
+                      <td>0.341</td>
+                      <td>0.302</td>
+                      <td>0.364</td>
+                      <td>0.313</td>
+                      <td>0.407</td>
+                      <td><strong>0.325</strong></td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V (+CoT)</td>
+                      <td>0.428</td>
+                      <td>0.416</td>
+                      <td>-</td>
+                      <td>0.427</td>
+                      <td>0.434</td>
+                      <td>0.401</td>
+                      <td>0.366</td>
+                      <td>0.406</td>
+                      <td>0.422</td>
+                      <td>0.472</td>
+                      <td>0.419</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini</td>
+                      <td><strong>0.287</strong></td>
+                      <td><strong>0.299</strong></td>
+                      <td>-</td>
+                      <td>0.473</td>
+                      <td>0.462</td>
+                      <td>0.430</td>
+                      <td>0.344</td>
+                      <td>0.520</td>
+                      <td>0.426</td>
+                      <td>0.357</td>
+                      <td>0.400</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini (+CoT)</td>
+                      <td>0.441</td>
+                      <td>0.481</td>
+                      <td>0.542</td>
+                      <td>0.595</td>
+                      <td>0.494</td>
+                      <td>0.533</td>
+                      <td>0.483</td>
+                      <td>0.569</td>
+                      <td>0.486</td>
+                      <td>0.463</td>
+                      <td>0.509</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div title="w./w.o. Vision" class="lib_examples" id="BoardPanel4" style="display: none;">
+
+                <!-- <div class="content has-text-justified"> -->
+                <md-block>
+                  How vision perception significantly enhances multimodal judging performance in traditional
+                  LLM-as-a-Judge setting,
+                  slightly outperforming MLLMs in judging. Vision Exp. stands for
+                  judging with a detailed image description.
+                </md-block>
+                <!-- </div> -->
+
+                <div class="table-container">
+                  <table>
+                    <tr>
+                      <th rowspan="2">MLLM</th>
+                      <th rowspan="2">Settings</th>
+                      <th colspan="2">Score (↑)</th>
+                      <th colspan="2">Pair (↑)</th>
+                      <th rowspan="2">Batch (↓)</th>
+                    </tr>
+                    <tr>
+                      <th>Pearson</th>
+                      <th>w. Tie</th>
+                      <th>w.o. Tie</th>
+                      <th>Edit Dis.</th>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">LLaMA2-70b</td>
+                      <td>Vision Exp</td>
+                      <td>0.060</td>
+                      <td>0.404</td>
+                      <td>0.550</td>
+                      <td>0.643</td>
+                    </tr>
+                    <tr>
+                      <td>No Vision</td>
+                      <td>0.126</td>
+                      <td>0.374</td>
+                      <td>0.537</td>
+                      <td>0.583</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">Mixtral-8x7b</td>
+                      <td>Vision Exp</td>
+                      <td>0.054</td>
+                      <td>0.374</td>
+                      <td>0.543</td>
+                      <td>0.603</td>
+                    </tr>
+                    <tr>
+                      <td>No Vision</td>
+                      <td>0.151</td>
+                      <td>0.478</td>
+                      <td>0.731</td>
+                      <td>0.546</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">GPT-3.5</td>
+                      <td>Vision Exp</td>
+                      <td>0.154</td>
+                      <td>0.453</td>
+                      <td>0.591</td>
+                      <td>0.473</td>
+                    </tr>
+                    <tr>
+                      <td>No Vision</td>
+                      <td>0.223</td>
+                      <td>0.459</td>
+                      <td>0.644</td>
+                      <td>0.504</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">GPT-4V</td>
+                      <td>Vision Exp</td>
+                      <td><strong>0.435</strong></td>
+                      <td><strong>0.544</strong></td>
+                      <td><strong>0.878</strong></td>
+                      <td>0.400</td>
+                    </tr>
+                    <tr>
+                      <td>No Vision</td>
+                      <td>0.299</td>
+                      <td>0.491</td>
+                      <td>0.868</td>
+                      <td><strong>0.394</strong></td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">Gemini</td>
+                      <td>Vision Exp</td>
+                      <td>0.120</td>
+                      <td>0.438</td>
+                      <td>0.785</td>
+                      <td>0.472</td>
+                    </tr>
+                    <tr>
+                      <td>No Vision</td>
+                      <td>0.108</td>
+                      <td>0.433</td>
+                      <td>0.758</td>
+                      <td>0.470</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div title="Overall (Full)" class="lib_examples" id="BoardPanel5" style="display: none;">
+
+                <!-- <div class="content has-text-justified"> -->
+                <md-block>
+                  The overall performance of different MLLMs in judging, compared with human annotations on different
+                  datasets. We sample all
+                  the data three times and took the average to mitigate the casualty. w. and w.o. tie represents tie
+                  and non-tie situations respectively. We
+                  omit Gemini’s results on the diffusion task for its challenges in processing AI-generated images.
+                  All presented data of Pearson similarity
+                  exhibit a p-value below 0.05, indicating a statistically significant level of confidence. Notice:
+                  Gemini-Pro∗ means Gemini-1.0-Pro-latest.
+
+                </md-block>
+                <!-- </div> -->
+
+                <div class="table-container">
+                  <table>
+                    <tr>
+                      <th rowspan="2">Settings</th>
+                      <th rowspan="2">MLLM</th>
+                      <th colspan="14">Categories</th>
+                      <th rowspan="2">Ave.</th>
+                    </tr>
+                    <tr>
+                      <th>COCO</th>
+                      <th>C.C.</th>
+                      <th>Diff.</th>
+                      <th>Graphics</th>
+                      <th>Math</th>
+                      <th>Text</th>
+                      <th>WIT</th>
+                      <th>Chart</th>
+                      <th>VisIT</th>
+                      <th>CC-3M</th>
+                      <th>M2W</th>
+                      <th>SciQA</th>
+                      <th>Aes</th>
+                      <th>MM-Vet</th>
+                    </tr>
+                    <tr>
+                      <td rowspan="11">Score (↑)</td>
+                      <td>CogVLM</td>
+                      <td>0.107</td>
+                      <td>-0.048</td>
+                      <td>0.049</td>
+                      <td>-0.158</td>
+                      <td>0.065</td>
+                      <td>0.097</td>
+                      <td>-0.131</td>
+                      <td>-0.135</td>
+                      <td>0.278</td>
+                      <td>0.157</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>0.028</td>
+
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.454</strong></td>
+                      <td><strong>0.507</strong></td>
+                      <td><strong>0.458</strong></td>
+                      <td><strong>0.645</strong></td>
+                      <td><strong>0.606</strong></td>
+                      <td><strong>0.624</strong></td>
+                      <td><strong>0.579</strong></td>
+                      <td><strong>0.645</strong></td>
+                      <td><strong>0.620</strong></td>
+                      <td><strong>0.431</strong></td>
+                      <td>0.185</td>
+                      <td><strong>0.383</strong></td>
+                      <td>0.401</td>
+                      <td><strong>0.326</strong></td>
+                      <td><strong>0.490</strong></td>
+
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.5-13b</td>
+                      <td>0.247</td>
+                      <td>0.227</td>
+                      <td>0.060</td>
+                      <td>0.242</td>
+                      <td>0.093</td>
+                      <td>0.245</td>
+                      <td>0.109</td>
+                      <td>0.237</td>
+                      <td>0.177</td>
+                      <td>0.071</td>
+                      <td><strong>0.424</strong></td>
+                      <td>0.279</td>
+                      <td><strong>0.414</strong></td>
+                      <td>0.322</td>
+                      <td>0.225</td>
+
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-7b</td>
+                      <td>0.300</td>
+                      <td>0.243</td>
+                      <td>0.058</td>
+                      <td>0.200</td>
+                      <td>0.090</td>
+                      <td>0.193</td>
+                      <td>0.044</td>
+                      <td>0.085</td>
+                      <td>0.228</td>
+                      <td>0.026</td>
+                      <td>0.299</td>
+                      <td>0.156</td>
+                      <td>0.148</td>
+                      <td>0.171</td>
+                      <td>0.160</td>
+
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-13b</td>
+                      <td>0.289</td>
+                      <td>0.226</td>
+                      <td>-0.110</td>
+                      <td>0.078</td>
+                      <td>0.056</td>
+                      <td>0.086</td>
+                      <td>0.062</td>
+                      <td>0.120</td>
+                      <td>0.163</td>
+                      <td>0.200</td>
+                      <td>0.140</td>
+                      <td>0.136</td>
+                      <td>0.163</td>
+                      <td>0.183</td>
+                      <td>0.128</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-34b</td>
+                      <td>0.285</td>
+                      <td>0.251</td>
+                      <td>-0.012</td>
+                      <td>0.262</td>
+                      <td>0.238</td>
+                      <td>0.258</td>
+                      <td>0.151</td>
+                      <td>0.318</td>
+                      <td>0.198</td>
+                      <td>0.109</td>
+                      <td>0.022</td>
+                      <td>0.206</td>
+                      <td>0.025</td>
+                      <td>0.265</td>
+                      <td>0.184</td>
+
+                    </tr>
+                    <tr>
+                      <td>Gemini-Pro</td>
+                      <td>0.262</td>
+                      <td>0.408</td>
+                      <td>-</td>
+                      <td>0.400</td>
+                      <td>0.228</td>
+                      <td>0.222</td>
+                      <td>0.418</td>
+                      <td>0.343</td>
+                      <td>0.336</td>
+                      <td>0.374</td>
+                      <td>0.324</td>
+                      <td>0.073</td>
+                      <td>0.360</td>
+                      <td>0.207</td>
+                      <td>0.304</td>
+
+                    </tr>
+                    <tr>
+                      <td>Gemini-Pro*</td>
+                      <td>0.211</td>
+                      <td>0.230</td>
+                      <td>0.114</td>
+                      <td>0.146</td>
+                      <td>0.060</td>
+                      <td>0.095</td>
+                      <td>0.041</td>
+                      <td>0.160</td>
+                      <td>0.174</td>
+                      <td>0.177</td>
+                      <td>0.282</td>
+                      <td>0.030</td>
+                      <td>0.329</td>
+                      <td>0.144</td>
+                      <td>0.157</td>
+
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-max</td>
+                      <td>0.311</td>
+                      <td>0.117</td>
+                      <td>0.072</td>
+                      <td>0.218</td>
+                      <td>0.175</td>
+                      <td>0.196</td>
+                      <td>0.028</td>
+                      <td>0.312</td>
+                      <td>0.151</td>
+                      <td>0.045</td>
+                      <td>0.244</td>
+                      <td>0.115</td>
+                      <td>0.177</td>
+                      <td>0.216</td>
+                      <td>0.170</td>
+
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-plus</td>
+                      <td>-0.050</td>
+                      <td>0.195</td>
+                      <td>0.019</td>
+                      <td>0.126</td>
+                      <td>0.106</td>
+                      <td>0.161</td>
+                      <td>0.151</td>
+                      <td>0.089</td>
+                      <td>0.128</td>
+                      <td>0.106</td>
+                      <td>0.268</td>
+                      <td>0.092</td>
+                      <td>0.347</td>
+                      <td>-0.019</td>
+                      <td>0.123</td>
+
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-chat</td>
+                      <td>-0.012</td>
+                      <td>-0.012</td>
+                      <td>0.033</td>
+                      <td>-0.422</td>
+                      <td>0.011</td>
+                      <td>-0.028</td>
+                      <td>0.021</td>
+                      <td>0.036</td>
+                      <td>-0.060</td>
+                      <td>0.083</td>
+                      <td>0.092</td>
+                      <td>-0.017</td>
+                      <td>-0.040</td>
+                      <td>0.115</td>
+                      <td>-0.014</td>
+
+                    </tr>
+                    <tr>
+                      <td rowspan="11">Pair w. Tie (↑)</td>
+                      <td>CogVLM</td>
+                      <td>0.548</td>
+                      <td>0.409</td>
+                      <td>0.562</td>
+                      <td>0.613</td>
+                      <td>0.412</td>
+                      <td>0.250</td>
+                      <td>0.273</td>
+                      <td>0.262</td>
+                      <td>0.324</td>
+                      <td>0.433</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>0.409</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.696</strong></td>
+                      <td><strong>0.824</strong></td>
+                      <td><strong>0.847</strong></td>
+                      <td><strong>0.639</strong></td>
+                      <td>0.564</td>
+                      <td><strong>0.673</strong></td>
+                      <td><strong>0.679</strong></td>
+                      <td><strong>0.657</strong></td>
+                      <td>0.640</td>
+                      <td><strong>0.612</strong></td>
+                      <td>0.521</td>
+                      <td>0.415</td>
+                      <td><strong>0.606</strong></td>
+                      <td><strong>0.529</strong></td>
+                      <td><strong>0.636</strong></td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.5-13b</td>
+                      <td>0.273</td>
+                      <td>0.478</td>
+                      <td>0.286</td>
+                      <td>0.273</td>
+                      <td><strong>0.657</strong></td>
+                      <td>0.510</td>
+                      <td>0.369</td>
+                      <td>0.383</td>
+                      <td>0.456</td>
+                      <td>0.484</td>
+                      <td>0.347</td>
+                      <td>0.223</td>
+                      <td>0.389</td>
+                      <td>0.254</td>
+                      <td>0.384</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-7b</td>
+                      <td>0.493</td>
+                      <td>0.571</td>
+                      <td>0.550</td>
+                      <td>0.383</td>
+                      <td>0.314</td>
+                      <td>0.507</td>
+                      <td>0.500</td>
+                      <td>0.352</td>
+                      <td>0.401</td>
+                      <td>0.402</td>
+                      <td>0.563</td>
+                      <td>0.310</td>
+                      <td>0.544</td>
+                      <td>0.463</td>
+                      <td>0.454</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-13b</td>
+                      <td>0.493</td>
+                      <td>0.586</td>
+                      <td>0.590</td>
+                      <td>0.333</td>
+                      <td>0.339</td>
+                      <td>0.507</td>
+                      <td>0.587</td>
+                      <td>0.296</td>
+                      <td>0.454</td>
+                      <td>0.459</td>
+                      <td>0.506</td>
+                      <td>0.322</td>
+                      <td>0.545</td>
+                      <td>0.448</td>
+                      <td>0.462</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-34b</td>
+                      <td>0.493</td>
+                      <td>0.600</td>
+                      <td>0.570</td>
+                      <td>0.300</td>
+                      <td>0.374</td>
+                      <td>0.551</td>
+                      <td>0.543</td>
+                      <td>0.254</td>
+                      <td>0.398</td>
+                      <td>0.392</td>
+                      <td>0.513</td>
+                      <td><strong>0.434</strong></td>
+                      <td>0.524</td>
+                      <td>0.499</td>
+                      <td>0.460</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini-Pro</td>
+                      <td>0.616</td>
+                      <td>0.787</td>
+                      <td>-</td>
+                      <td>0.650</td>
+                      <td>0.436</td>
+                      <td>0.664</td>
+                      <td>0.605</td>
+                      <td>0.500</td>
+                      <td><strong>0.660</strong></td>
+                      <td>0.560</td>
+                      <td>0.370</td>
+                      <td>0.262</td>
+                      <td>0.190</td>
+                      <td>0.312</td>
+                      <td>0.509</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini-Pro*</td>
+                      <td>0.273</td>
+                      <td>0.273</td>
+                      <td>0.240</td>
+                      <td>0.324</td>
+                      <td>0.237</td>
+                      <td>0.275</td>
+                      <td>0.136</td>
+                      <td>0.377</td>
+                      <td>0.232</td>
+                      <td>0.294</td>
+                      <td>0.368</td>
+                      <td>0.260</td>
+                      <td>0.209</td>
+                      <td>0.303</td>
+                      <td>0.272</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-max</td>
+                      <td>0.403</td>
+                      <td>0.464</td>
+                      <td>0.372</td>
+                      <td>0.494</td>
+                      <td>0.438</td>
+                      <td>0.500</td>
+                      <td>0.533</td>
+                      <td>0.479</td>
+                      <td>0.421</td>
+                      <td>0.421</td>
+                      <td>0.411</td>
+                      <td>0.392</td>
+                      <td>0.325</td>
+                      <td>0.474</td>
+                      <td>0.438</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-plus</td>
+                      <td>0.479</td>
+                      <td>0.507</td>
+                      <td>0.650</td>
+                      <td>0.450</td>
+                      <td>0.328</td>
+                      <td>0.522</td>
+                      <td>0.500</td>
+                      <td>0.380</td>
+                      <td>0.453</td>
+                      <td>0.383</td>
+                      <td><strong>0.577</strong></td>
+                      <td>0.321</td>
+                      <td>0.601</td>
+                      <td>0.457</td>
+                      <td>0.472</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-chat</td>
+                      <td>0.493</td>
+                      <td>0.486</td>
+                      <td>0.480</td>
+                      <td>0.311</td>
+                      <td>0.248</td>
+                      <td>0.406</td>
+                      <td>0.543</td>
+                      <td>0.310</td>
+                      <td>0.332</td>
+                      <td>0.292</td>
+                      <td>0.547</td>
+                      <td>0.298</td>
+                      <td>0.507</td>
+                      <td>0.478</td>
+                      <td>0.409</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="11">Pair w.o. Tie (↑)</td>
+                      <td>CogVLM</td>
+                      <td>0.654</td>
+                      <td>0.450</td>
+                      <td>0.643</td>
+                      <td>0.704</td>
+                      <td>0.481</td>
+                      <td>0.292</td>
+                      <td>0.500</td>
+                      <td>0.423</td>
+                      <td>0.500</td>
+                      <td>0.591</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>0.524</td>
+                    </tr>
+                    <tr>
+                      <td>GPT-4V</td>
+                      <td><strong>0.804</strong></td>
+                      <td><strong>0.870</strong></td>
+                      <td><strong>0.922</strong></td>
+                      <td><strong>0.807</strong></td>
+                      <td><strong>0.801</strong></td>
+                      <td><strong>0.805</strong></td>
+                      <td>0.734</td>
+                      <td><strong>0.849</strong></td>
+                      <td><strong>0.761</strong></td>
+                      <td><strong>0.703</strong></td>
+                      <td>0.699</td>
+                      <td>0.647</td>
+                      <td><strong>0.755</strong></td>
+                      <td>0.659</td>
+                      <td><strong>0.773</strong></td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.5-13b</td>
+                      <td>0.327</td>
+                      <td>0.537</td>
+                      <td>0.302</td>
+                      <td>0.300</td>
+                      <td>0.726</td>
+                      <td>0.684</td>
+                      <td>0.600</td>
+                      <td>0.610</td>
+                      <td>0.648</td>
+                      <td>0.583</td>
+                      <td>0.449</td>
+                      <td>0.443</td>
+                      <td>0.498</td>
+                      <td>0.344</td>
+                      <td>0.504</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-7b</td>
+                      <td>0.593</td>
+                      <td>0.597</td>
+                      <td>0.618</td>
+                      <td>0.434</td>
+                      <td>0.468</td>
+                      <td>0.636</td>
+                      <td>0.561</td>
+                      <td>0.471</td>
+                      <td>0.436</td>
+                      <td>0.466</td>
+                      <td>0.633</td>
+                      <td>0.621</td>
+                      <td>0.568</td>
+                      <td>0.705</td>
+                      <td>0.558</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-13b</td>
+                      <td>0.614</td>
+                      <td>0.612</td>
+                      <td>0.663</td>
+                      <td>0.382</td>
+                      <td>0.487</td>
+                      <td>0.618</td>
+                      <td>0.659</td>
+                      <td>0.420</td>
+                      <td>0.503</td>
+                      <td>0.549</td>
+                      <td>0.576</td>
+                      <td>0.598</td>
+                      <td>0.565</td>
+                      <td>0.620</td>
+                      <td>0.562</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-34b</td>
+                      <td>0.607</td>
+                      <td>0.824</td>
+                      <td>0.855</td>
+                      <td>0.402</td>
+                      <td>0.587</td>
+                      <td>0.750</td>
+                      <td><strong>0.758</strong></td>
+                      <td>0.381</td>
+                      <td>0.503</td>
+                      <td>0.564</td>
+                      <td><strong>0.712</strong></td>
+                      <td><strong>0.679</strong></td>
+                      <td>0.694</td>
+                      <td><strong>0.762</strong></td>
+                      <td>0.648</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini-Pro</td>
+                      <td>0.717</td>
+                      <td>0.840</td>
+                      <td>-</td>
+                      <td>0.770</td>
+                      <td>0.678</td>
+                      <td>0.793</td>
+                      <td>0.688</td>
+                      <td>0.658</td>
+                      <td>0.711</td>
+                      <td>0.652</td>
+                      <td>0.471</td>
+                      <td>0.358</td>
+                      <td>0.265</td>
+                      <td>0.400</td>
+                      <td>0.615</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini-Pro*</td>
+                      <td>0.311</td>
+                      <td>0.340</td>
+                      <td>0.308</td>
+                      <td>0.419</td>
+                      <td>0.336</td>
+                      <td>0.366</td>
+                      <td>0.200</td>
+                      <td>0.439</td>
+                      <td>0.290</td>
+                      <td>0.358</td>
+                      <td>0.469</td>
+                      <td>0.336</td>
+                      <td>0.266</td>
+                      <td>0.398</td>
+                      <td>0.345</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-max</td>
+                      <td>0.657</td>
+                      <td>0.674</td>
+                      <td>0.556</td>
+                      <td>0.667</td>
+                      <td>0.635</td>
+                      <td>0.732</td>
+                      <td>0.647</td>
+                      <td>0.638</td>
+                      <td>0.560</td>
+                      <td>0.586</td>
+                      <td>0.608</td>
+                      <td>0.646</td>
+                      <td>0.741</td>
+                      <td>0.662</td>
+                      <td>0.644</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-plus</td>
+                      <td>0.596</td>
+                      <td>0.556</td>
+                      <td>0.771</td>
+                      <td>0.554</td>
+                      <td>0.463</td>
+                      <td>0.735</td>
+                      <td>0.575</td>
+                      <td>0.535</td>
+                      <td>0.521</td>
+                      <td>0.510</td>
+                      <td>0.659</td>
+                      <td>0.612</td>
+                      <td>0.627</td>
+                      <td>0.659</td>
+                      <td>0.598</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-chat</td>
+                      <td>0.603</td>
+                      <td>0.523</td>
+                      <td>0.625</td>
+                      <td>0.333</td>
+                      <td>0.386</td>
+                      <td>0.574</td>
+                      <td>0.625</td>
+                      <td>0.431</td>
+                      <td>0.370</td>
+                      <td>0.396</td>
+                      <td>0.618</td>
+                      <td>0.594</td>
+                      <td>0.539</td>
+                      <td>0.755</td>
+                      <td>0.527</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="10">Batch (↓)</td>
+                      <td>GPT-4V</td>
+                      <td><strong>0.318</strong></td>
+                      <td>0.353</td>
+                      <td><strong>0.070</strong></td>
+                      <td><strong>0.385</strong></td>
+                      <td><strong>0.348</strong></td>
+                      <td><strong>0.319</strong></td>
+                      <td><strong>0.290</strong></td>
+                      <td><strong>0.347</strong></td>
+                      <td><strong>0.300</strong></td>
+                      <td>0.402</td>
+                      <td>0.597</td>
+                      <td>0.462</td>
+                      <td>0.453</td>
+                      <td><strong>0.411</strong></td>
+                      <td><strong>0.361</strong></td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.5-13b</td>
+                      <td>0.577</td>
+                      <td>0.492</td>
+                      <td>0.562</td>
+                      <td>0.535</td>
+                      <td>0.598</td>
+                      <td>0.650</td>
+                      <td>0.616</td>
+                      <td>0.644</td>
+                      <td>0.620</td>
+                      <td>0.563</td>
+                      <td>0.639</td>
+                      <td>0.563</td>
+                      <td>0.650</td>
+                      <td>0.652</td>
+                      <td>0.597</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-7b</td>
+                      <td>0.575</td>
+                      <td>0.538</td>
+                      <td>0.618</td>
+                      <td>0.462</td>
+                      <td>0.601</td>
+                      <td>0.598</td>
+                      <td>0.564</td>
+                      <td>0.679</td>
+                      <td>0.586</td>
+                      <td>0.503</td>
+                      <td>0.507</td>
+                      <td>0.403</td>
+                      <td>0.525</td>
+                      <td>0.565</td>
+                      <td>0.552</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-13b</td>
+                      <td>0.614</td>
+                      <td>0.612</td>
+                      <td>0.663</td>
+                      <td>0.382</td>
+                      <td>0.487</td>
+                      <td>0.618</td>
+                      <td>0.659</td>
+                      <td>0.420</td>
+                      <td>0.503</td>
+                      <td>0.549</td>
+                      <td>0.531</td>
+                      <td>0.415</td>
+                      <td>0.500</td>
+                      <td>0.557</td>
+                      <td>0.536</td>
+                    </tr>
+                    <tr>
+                      <td>LLmA-1.6-34b</td>
+                      <td>0.449</td>
+                      <td>0.411</td>
+                      <td>0.500</td>
+                      <td>0.561</td>
+                      <td>0.575</td>
+                      <td>0.544</td>
+                      <td>0.483</td>
+                      <td>0.552</td>
+                      <td>0.542</td>
+                      <td>0.479</td>
+                      <td>0.529</td>
+                      <td>0.437</td>
+                      <td>0.500</td>
+                      <td>0.450</td>
+                      <td>0.501</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini-Pro</td>
+                      <td>0.287</td>
+                      <td><strong>0.299</strong></td>
+                      <td>-</td>
+                      <td>0.473</td>
+                      <td>0.462</td>
+                      <td>0.430</td>
+                      <td>0.344</td>
+                      <td>0.520</td>
+                      <td>0.426</td>
+                      <td><strong>0.357</strong></td>
+                      <td>0.613</td>
+                      <td>0.412</td>
+                      <td>0.467</td>
+                      <td>0.529</td>
+                      <td>0.432</td>
+                    </tr>
+                    <tr>
+                      <td>Gemini-Pro*</td>
+                      <td>0.378</td>
+                      <td>0.370</td>
+                      <td>-</td>
+                      <td>0.572</td>
+                      <td>0.508</td>
+                      <td>0.452</td>
+                      <td>0.417</td>
+                      <td>0.572</td>
+                      <td>0.492</td>
+                      <td>0.434</td>
+                      <td>0.636</td>
+                      <td>0.412</td>
+                      <td>0.489</td>
+                      <td>0.506</td>
+                      <td>0.480</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-max</td>
+                      <td>0.477</td>
+                      <td>0.407</td>
+                      <td>0.500</td>
+                      <td>0.480</td>
+                      <td>0.507</td>
+                      <td>0.515</td>
+                      <td>0.493</td>
+                      <td>0.539</td>
+                      <td>0.468</td>
+                      <td>0.407</td>
+                      <td>0.563</td>
+                      <td>0.503</td>
+                      <td><strong>0.444</strong></td>
+                      <td>0.500</td>
+                      <td>0.486</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-plus</td>
+                      <td>0.640</td>
+                      <td>0.616</td>
+                      <td>0.500</td>
+                      <td>0.666</td>
+                      <td>0.644</td>
+                      <td>0.634</td>
+                      <td>0.592</td>
+                      <td>0.747</td>
+                      <td>0.671</td>
+                      <td>0.540</td>
+                      <td><strong>0.488</strong></td>
+                      <td>0.409</td>
+                      <td>0.523</td>
+                      <td>0.470</td>
+                      <td>0.581</td>
+                    </tr>
+                    <tr>
+                      <td>Qwen-vl-chat</td>
+                      <td>0.733</td>
+                      <td>0.701</td>
+                      <td>0.500</td>
+                      <td>0.669</td>
+                      <td>0.638</td>
+                      <td>0.554</td>
+                      <td>0.638</td>
+                      <td>0.723</td>
+                      <td>0.687</td>
+                      <td>0.668</td>
+                      <td>0.500</td>
+                      <td><strong>0.389</strong></td>
+                      <td>0.531</td>
+                      <td>0.572</td>
+                      <td>0.607</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <section class="section" id="Empirical Result">
+      <div class="container is-max-desktop">
         <div class="featurecard-container">
           <!-- Trustworthiness and Utility -->
+          <h1 class="title">Empirical Results</h1>
           <div class="feature_1x1">
             <div class="featurecard">
               <h2>MLLM Judgment vs Human Annotation</h2>
             </div>
             <div class="description">
-              <p><ol>
-                <li><b>Scoring Evaluation: </b>GPT-4V demonstrated the highest similarity to human scoring with a similarity score of 0.557. 
+              <p>
+              <ol>
+                <li><b>Scoring Evaluation: </b>GPT-4V demonstrated the highest similarity to human scoring with a
+                  similarity score of 0.557.
                   In contrast, Gemini achieved only 0.332, with LLaVA and CogVLM scoring even lower.
-                  This discrepancy is primarily due to Gemini’s tendency to assign scores around 4 points, seldom giving 1 or 2 points. 
-                  LLaVA and CogVLM show a similar pattern to Gemini, predominantly assigning scores around 4 points. 
-                  We attribute this to a ‘High-Score’ Bias, akin to the ‘Yes/No’ bias, 
-                  which may result from an imbalance in positive and negative judging instructions in their training data, 
-                  severely limits their ability to provide just and varied scores in scoring settings. 
-                  In comparison, GPT-4V’s scores are more evenly distributed and align closely with human preferences.</li>
-                <li><b>Pair Comparison: </b>GPT-4V outshines other MLLMs in pair comparison tasks, achieving 0.683 in tie settings and 0.806 in non-tie settings, 
-                  surpassing 0.8 in many datasets, which indicate a strong alignment with human preferences. 
-                  Gemini, LLaVA, and CogVLM show a marked preference for declaring a clear winner, possibly due to a lack of tie situations in their training, leading to biased judgments. 
-                  It’s also interesting that the frequency of ties given by GPT-4V closely mirrors that of human judges, suggesting similar thresholds for tie decisions.</li>
-                <li><b>Batch Ranking: </b> GPT-4V aligns more closely with human ranking results, indicating a significant lead with a mean Levenshtein Distance of 0.313. 
-                  However, there is still substantial room for improvement in this task for all MLLMs. Notably, CogVLM is unable to provide a full ranking in this context, 
-                  offering only the top choice; so it was excluded from this comparison; LLaVA also exhibits position bias influenced by prompt structure, 
-                  often replicating judgments seen in example prompts, which complicates its ability to produce fair judgments.</li>
-              </ol></p>
+                  This discrepancy is primarily due to Gemini’s tendency to assign scores around 4 points, seldom giving
+                  1 or 2 points.
+                  LLaVA and CogVLM show a similar pattern to Gemini, predominantly assigning scores around 4 points.
+                  We attribute this to a ‘High-Score’ Bias, akin to the ‘Yes/No’ bias,
+                  which may result from an imbalance in positive and negative judging instructions in their training
+                  data,
+                  severely limits their ability to provide just and varied scores in scoring settings.
+                  In comparison, GPT-4V’s scores are more evenly distributed and align closely with human preferences.
+                </li>
+                <li><b>Pair Comparison: </b>GPT-4V outshines other MLLMs in pair comparison tasks, achieving 0.683 in
+                  tie settings and 0.806 in non-tie settings,
+                  surpassing 0.8 in many datasets, which indicate a strong alignment with human preferences.
+                  Gemini, LLaVA, and CogVLM show a marked preference for declaring a clear winner, possibly due to a
+                  lack of tie situations in their training, leading to biased judgments.
+                  It’s also interesting that the frequency of ties given by GPT-4V closely mirrors that of human judges,
+                  suggesting similar thresholds for tie decisions.</li>
+                <li><b>Batch Ranking: </b> GPT-4V aligns more closely with human ranking results, indicating a
+                  significant lead with a mean Levenshtein Distance of 0.313.
+                  However, there is still substantial room for improvement in this task for all MLLMs. Notably, CogVLM
+                  is unable to provide a full ranking in this context,
+                  offering only the top choice; so it was excluded from this comparison; LLaVA also exhibits position
+                  bias influenced by prompt structure,
+                  often replicating judgments seen in example prompts, which complicates its ability to produce fair
+                  judgments.</li>
+              </ol>
+              </p>
             </div>
           </div>
 
@@ -113,14 +2213,16 @@
             </div>
             <div class="description">
               <p>
-                To be a reliable judge, consistent decision-making across repeated evaluations 
+                To be a reliable judge, consistent decision-making across repeated evaluations
                 of the same query is crucial. For this purpose, we conducted six repeated tests
-                with MLLM judgments and calculated the weighted average consistency scores and 
-                Majority Consistency Criterion ratios for GPT-4V and Gemini. 
-                Despite a higher temperature setting, GPT-4V substantially outperforms Gemini across all tasks. 
-                Particularly in Pair Comparison, GPT-4V achieves a higher consistency score of 0.675, 
-                but it encounters difficulties in maintaining similar levels of consistency in Scoring and Batch Ranking tasks, 
-                with scores dropping to 0.611 and 0.418, indicating the challenge of producing qualified and convincing judgments.
+                with MLLM judgments and calculated the weighted average consistency scores and
+                Majority Consistency Criterion ratios for GPT-4V and Gemini.
+                Despite a higher temperature setting, GPT-4V substantially outperforms Gemini across all tasks.
+                Particularly in Pair Comparison, GPT-4V achieves a higher consistency score of 0.675,
+                but it encounters difficulties in maintaining similar levels of consistency in Scoring and Batch Ranking
+                tasks,
+                with scores dropping to 0.611 and 0.418, indicating the challenge of producing qualified and convincing
+                judgments.
               </p>
             </div>
           </div>
@@ -132,16 +2234,21 @@
             </div>
             <div class="description">
               <p>
-                We explore the feasibility of using LLMs for judging textbased responses without directly analyzing the original images. 
-                This involves two approaches: omitting vision information entirely and providing a detailed description of the picture. 
-                Surprisingly, we find that LLMs’ performance in multimodal judging tasks significantly improved with picture descriptions, 
-                achieving a Pearson similarity of 0.435 in Scoring Evaluation tasks, markedly outperformed judgments made without any vision
-                perception. Notably, in non-tie Pair Comparison, MLLMs with detailed vision descriptions even exceed the standard performance of MLLMs in judging. 
-                This suggests that MLLMs may lack certain human-like judging capabilities, while LLMs can effectively judge multimodal tasks when provided with comprehensive task-related descriptions.
+                We explore the feasibility of using LLMs for judging textbased responses without directly analyzing the
+                original images.
+                This involves two approaches: omitting vision information entirely and providing a detailed description
+                of the picture.
+                Surprisingly, we find that LLMs’ performance in multimodal judging tasks significantly improved with
+                picture descriptions,
+                achieving a Pearson similarity of 0.435 in Scoring Evaluation tasks, markedly outperformed judgments
+                made without any vision
+                perception. Notably, in non-tie Pair Comparison, MLLMs with detailed vision descriptions even exceed the
+                standard performance of MLLMs in judging.
+                This suggests that MLLMs may lack certain human-like judging capabilities, while LLMs can effectively
+                judge multimodal tasks when provided with comprehensive task-related descriptions.
               </p>
             </div>
           </div>
-
 
           <!-- Transparency in Trustworthiness -->
           <div class="feature_1x1">
@@ -150,343 +2257,376 @@
               <h2>Human Agreement</h2>
             </div>
             <div class="description">
-              <p>Our manual evaluation of MLLMs in judging, focusing on agreement and scoring, revealed notable findings. 
-                GPT-4V achieved around 70% human agreement across all settings, excelling in the Pair Comparison task with 79.3% agreement. 
-                Specifically, GPT-4V reached 78% in human agreement for Pair Comparison, with Gemini close at 72%, indicating strong performance 
-                in most sample pairs and supporting the idea that large models excel in pairwise distinctions (Zheng et al., 2023b), though improvements 
-                are needed in other judging settings. 
-                
-                In the Scoring Evaluation task, GPT-4V achieved a 70% human agreement rate, peaking at 79.9% in MS-COCO, 
-                while Gemini maintained an average rate of 67.7%. To assess the consistency of MLLM judging quality across multiple responses to a single 
-                image-instruction pair, we employed the Mean Absolute Deviation (MAD) metric. This measures the average absolute variance between individual scores 
-                and the mean, thereby gauging quality variability. Figure 16 demonstrates that GPT-4V exhibits lower variation in quality assessments, 
-                indicating more consistent and reliable judgment compared to Gemini, which is further evidenced by its superior performance. 
+              <p>Our manual evaluation of MLLMs in judging, focusing on agreement and scoring, revealed notable
+                findings.
+                GPT-4V achieved around 70% human agreement across all settings, excelling in the Pair Comparison task
+                with 79.3% agreement.
+                Specifically, GPT-4V reached 78% in human agreement for Pair Comparison, with Gemini close at 72%,
+                indicating strong performance
+                in most sample pairs and supporting the idea that large models excel in pairwise distinctions (Zheng et
+                al., 2023b), though improvements
+                are needed in other judging settings.
 
-                However, in Batch Ranking, both models showed reduced human performance. GPT-4V managed 69% human agreement, and Gemini only 47%. 
-                Additionally, their analyses received lower scores, especially in complex tasks like Math and graphics information. 
-                This suggests that the models’ inherent capabilities may not fully support understanding and completing intricate user instructions to provide accurate judgments.</p>
+                In the Scoring Evaluation task, GPT-4V achieved a 70% human agreement rate, peaking at 79.9% in MS-COCO,
+                while Gemini maintained an average rate of 67.7%. To assess the consistency of MLLM judging quality
+                across multiple responses to a single
+                image-instruction pair, we employed the Mean Absolute Deviation (MAD) metric. This measures the average
+                absolute variance between individual scores
+                and the mean, thereby gauging quality variability. Figure 16 demonstrates that GPT-4V exhibits lower
+                variation in quality assessments,
+                indicating more consistent and reliable judgment compared to Gemini, which is further evidenced by its
+                superior performance.
 
-            </div>
-          </div>
-        </div>
-
-
-        <h2 class="supportTitle2">Bias and Hallucination</h2>
-        <br>
-        <div class="featurecard-container">
-          <div class="feature">
-
-            <input type="checkbox" id="toggle" class="toggle">
-
-
-            <div class="featurecard">
-              <h2>Egocentric Bias</h2>
-              
-            </div>
-            <div class="description">
-              <p>It means models assign higher scores to their own responses while scoring others lower. GPT-4V exhibits a slight degree of Egocentricity. 
-                This bias contrasts with Gemini, which tends to judge each response more equitably, displaying a similar scoring distribution across different sources. 
-                Further investigation into the rationale behind GPT-4V’s self-favoring behavior indicated that its judgments align closely with its own ethical guidelines. 
-                For instance, when faced with questions involving user privacy, GPT-4V’s responses typically emphasize privacy preservation and refuse to engage, 
-                leading to higher self-scoring in these scenarios. Despite efforts in prompt engineering to encourage impartiality, 
-                these models inherently rely on their built-in judgment criteria retained from post-alignment, which can lead to a divergence from human preferences. 
-                Such a discrepancy highlights the complexity of aligning MLLM judgments with human standards.</p>
-            </div>
-          </div>
-          <div class="feature">
-
-            <input type="checkbox" id="toggle#2" class="toggle">
-
-            <div class="featurecard">
-              <h2>Position Bias</h2>
-
-            </div>
-            <div class="description">
-              <p>It means a model consistently favors answers in specific positions, often influenced by training data that typically places 
-                correct responses at the beginning or end of prompts. Figure 4 illustrates this bias in LLaVA and CogVLM, 
-                showing a distinct preference for one particular option in Pair Comparison tasks, habitually selecting the answer in their favored position. 
-                Such bias might arise from their restricted instruction-following capabilities, making their judgments disproportionately influenced by the 
-                structure of prompts. For example, when a Batch Ranking prompt includes a sample answer sequence like ‘ABCD’, LLaVA tends to replicate this 
-                sequence in its responses with a high frequency of 88.2%, significantly more than other sequences. However, introducing multiple examples in 
-                the prompt appears to lessen this bias, as evidenced by a reduced Position Bias score of 53.3% when two examples are provided. 
-                This suggests that augmenting prompts with more examples might help guide these models to adhere more closely to the given instructions.</p>
-              
-            </div>
-          </div>
-          <div class="feature">
-            <input type="checkbox" id="toggle#3" class="toggle">
-
-
-            <div class="featurecard">
-              <h2>Length Bias</h2>
-
-            </div>
-
-            <div class="description">
-              <p>Length bias means models prefer longer answers over concise but correct ones, 
-                also known as verbosity bias (Zheng et al., 2023b). As illustrated in Figure 6, 
-                both GPT-4V and Gemini are inclined to award higher scores and preference to longer content. 
-                To delve deeper into this bias, we conducted an expanded scoring experiment using GPT-4, 
-                which lacks vision perception, to semantically increase the length of answers without altering their original meaning. 
-                As shown in Figure 7, the results showed a noticeable increase in the scores assigned by GPT-4V and Gemini, averaging gains of 
-                0.6 and 0.75 points, respectively. This finding conclusively demonstrates the presence of Verbosity Bias, suggesting that MLLMs 
-                might exploit extended text as a backdoor method to achieve higher scores.</p>
-              
-            </div>
-          </div>
-          <div class="feature">
-            <input type="checkbox" id="toggle#4" class="toggle">
-
-            <div class="featurecard">
-              <h2>Hallucination Detection and Mitigation</h2>
-
-            </div>
-            <div class="description">
-              <p>We observe a higher incidence of hallucinations in Batch Ranking tasks compared to Pair Comparison and Score Evaluation, 
-                which may stem from misunderstandings of the long-term context. Delving deeper, we encounter more severe language hallucinations, 
-                including miscomprehensions of textual meanings or errors in text retrieval, which significantly impact the accuracy and reliability
-                of the final judgments. To mitigate hallucination, we perform multi-step CoT on MLLM-AS-A-JUDGE-HARD by telling MLLMs to judge step-by-step, 
-                perform extra reasoning steps before normal “Analyze-then-Judge” setting, following: 1) imageinstruction 2) image 3) instruction. 
-                As shown in Table 6 in paper, hallucinations are mitigated across all settings, with extra reasoning on image information showing the most notable improvement in both score and pair tasks. 
-                Notably, in the Batch Ranking task, which involves analyzing longer texts, more reasoning steps significantly reduce hallucinations.</p>
+                However, in Batch Ranking, both models showed reduced human performance. GPT-4V managed 69% human
+                agreement, and Gemini only 47%.
+                Additionally, their analyses received lower scores, especially in complex tasks like Math and graphics
+                information.
+                This suggests that the models’ inherent capabilities may not fully support understanding and completing
+                intricate user instructions to provide accurate judgments.</p>
 
             </div>
           </div>
+
 
 
         </div>
-
-
-
-
-        <br>
-        <!--          <div class="feature">-->
-        <!--            <h2>Taxonomy for TrustLLM</h2>-->
-        <!--            <div class="flourish-embed flourish-hierarchy" data-src="visualisation/15357314">-->
-        <!--              <script src="https://public.flourish.studio/resources/embed.js"></script>-->
-        <!--            </div>-->
-        <!--          </div>-->
-
-
       </div>
+  </div>
+  </section>
+  <section class="section" id="Bias and Hallucination">
+    <h1 class="title">Bias and Hallucination</h1>
+    <br>
+    <div class="featurecard-container">
+      <div class="feature">
 
-      <h1 class="supportTitle">Models</h1>
+        <input type="checkbox" id="toggle" class="toggle">
 
+
+        <div class="featurecard">
+          <h2>Egocentric Bias</h2>
+
+        </div>
+        <div class="description">
+          <p>It means models assign higher scores to their own responses while scoring others lower. GPT-4V exhibits a
+            slight degree of Egocentricity.
+            This bias contrasts with Gemini, which tends to judge each response more equitably, displaying a similar
+            scoring distribution across different sources.
+            Further investigation into the rationale behind GPT-4V’s self-favoring behavior indicated that its judgments
+            align closely with its own ethical guidelines.
+            For instance, when faced with questions involving user privacy, GPT-4V’s responses typically emphasize
+            privacy preservation and refuse to engage,
+            leading to higher self-scoring in these scenarios. Despite efforts in prompt engineering to encourage
+            impartiality,
+            these models inherently rely on their built-in judgment criteria retained from post-alignment, which can
+            lead to a divergence from human preferences.
+            Such a discrepancy highlights the complexity of aligning MLLM judgments with human standards.</p>
+        </div>
+      </div>
+      <div class="feature">
+
+        <input type="checkbox" id="toggle#2" class="toggle">
+
+        <div class="featurecard">
+          <h2>Position Bias</h2>
+
+        </div>
+        <div class="description">
+          <p>It means a model consistently favors answers in specific positions, often influenced by training data that
+            typically places
+            correct responses at the beginning or end of prompts. Figure 4 illustrates this bias in LLaVA and CogVLM,
+            showing a distinct preference for one particular option in Pair Comparison tasks, habitually selecting the
+            answer in their favored position.
+            Such bias might arise from their restricted instruction-following capabilities, making their judgments
+            disproportionately influenced by the
+            structure of prompts. For example, when a Batch Ranking prompt includes a sample answer sequence like
+            ‘ABCD’, LLaVA tends to replicate this
+            sequence in its responses with a high frequency of 88.2%, significantly more than other sequences. However,
+            introducing multiple examples in
+            the prompt appears to lessen this bias, as evidenced by a reduced Position Bias score of 53.3% when two
+            examples are provided.
+            This suggests that augmenting prompts with more examples might help guide these models to adhere more
+            closely to the given instructions.</p>
+
+        </div>
+      </div>
+      <div class="feature">
+        <input type="checkbox" id="toggle#3" class="toggle">
+
+
+        <div class="featurecard">
+          <h2>Length Bias</h2>
+
+        </div>
+
+        <div class="description">
+          <p>Length bias means models prefer longer answers over concise but correct ones,
+            also known as verbosity bias (Zheng et al., 2023b). As illustrated in Figure 6,
+            both GPT-4V and Gemini are inclined to award higher scores and preference to longer content.
+            To delve deeper into this bias, we conducted an expanded scoring experiment using GPT-4,
+            which lacks vision perception, to semantically increase the length of answers without altering their
+            original meaning.
+            As shown in Figure 7, the results showed a noticeable increase in the scores assigned by GPT-4V and Gemini,
+            averaging gains of
+            0.6 and 0.75 points, respectively. This finding conclusively demonstrates the presence of Verbosity Bias,
+            suggesting that MLLMs
+            might exploit extended text as a backdoor method to achieve higher scores.</p>
+
+        </div>
+      </div>
+      <div class="feature">
+        <input type="checkbox" id="toggle#4" class="toggle">
+
+        <div class="featurecard">
+          <h2>Hallucination Detection and Mitigation</h2>
+
+        </div>
+        <div class="description">
+          <p>We observe a higher incidence of hallucinations in Batch Ranking tasks compared to Pair Comparison and
+            Score Evaluation,
+            which may stem from misunderstandings of the long-term context. Delving deeper, we encounter more severe
+            language hallucinations,
+            including miscomprehensions of textual meanings or errors in text retrieval, which significantly impact the
+            accuracy and reliability
+            of the final judgments. To mitigate hallucination, we perform multi-step CoT on MLLM-AS-A-JUDGE-HARD by
+            telling MLLMs to judge step-by-step,
+            perform extra reasoning steps before normal “Analyze-then-Judge” setting, following: 1) imageinstruction 2)
+            image 3) instruction.
+            As shown in Table 6 in paper, hallucinations are mitigated across all settings, with extra reasoning on
+            image information showing the most notable improvement in both score and pair tasks.
+            Notably, in the Batch Ranking task, which involves analyzing longer texts, more reasoning steps
+            significantly reduce hallucinations.</p>
+
+        </div>
+      </div>
     </div>
-      <div class="content">
-        <div class="content-table flex-column">
 
-          <br>
-       
+  </section>
+  <section class="section" id="Models">
+    <h1 class="title">Models</h1>
 
-          <div class="flex-row">
-            <div class="custom-table-container center add-top-margin-small">
-              <table class="custom-table">
-                <thead>
-                  <tr>
-                    <th>Model</th>
-                    <th>Model Size</th>
-                    <th>Open-Weight</th>
-                    <th>Version</th>
-                    <th>Creator</th>
-                    <th>Source</th>
-                    <th>Link</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td data-title="Model">GPT-4V(ision)</td>
-                    <td data-title="Model Size">unknown</td>
-                    <td data-title="Open-Weight"><span class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
-                      No
-                    </span>
-                    <td data-title="Version">-</td>
-                    <td data-title="Creator">OpenAI</td>
-                    <td data-title="Source">OpenAI API</td>
-                    <td data-title="Link">
-                                  <a href="https://openai.com/research/gpt-4v-system-card" target="_blank">
-                      <button class="custom-button-flat"><img src="img/openai.png"></button>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td data-title="Model">Gemini-Pro-Vision</td>
-                    <td data-title="Model Size">unknown</td>
-                    <td data-title="Open-Weight"><span class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
-                      No
-
-                    </span>
-
-                    <td data-title="Version">v1.0</td>
-                    <td data-title="Creator">Google</td>
-                    <td data-title="Source">Google API</td>
-                    <td data-title="Link">
-                                  <a href="https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemini-pro-vision" target="_blank">
-                      <button class="custom-button-flat"><img src="img/palm2.png"></button>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td data-title="Model">Gemini-Pro-Vision</td>
-                    <td data-title="Model Size">unknown</td>
-                    <td data-title="Open-Weight"><span class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
-                      No
-                    </span>
-                    </td>
-                    <td data-title="Version">v1.0-latest</td>
-                    <td data-title="Creator">Google</td>
-                    <td data-title="Source">Google API</td>
-                    <td data-title="Link">
-                    <a href="https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemini-pro-vision" target="_blank">
-                      <button class="custom-button-flat"><img src="img/palm2.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-                  <tr>
-                    <td data-title="Model">Qwen-VL-Max</td>
-                    <td data-title="Model Size">unknown</td>
-                    <td data-title="Open-Weight"><span class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
-                      No
-                    </span>
-                    <td data-title="Version">-</td>
-                    <td data-title="Creator">Ali</td>
-                    <td data-title="Source">Ali API</td>
-                    <td data-title="Link">
-                      <a href="https://github.com/QwenLM/Qwen-VL" target="_blank">
-                      <button class="custom-button-flat"><img src="img/ali.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-                  <tr>
-                    <td data-title="Model">Qwen-VL-Plus</td>
-                    <td data-title="Model Size">unknown</td>
-                    <td data-title="Open-Weight"><span class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
-                      No
-                    </span>
-                    <td data-title="Version">-</td>
-                    <td data-title="Creator">Ali</td>
-                    <td data-title="Source">Ali API</td>
-                    <td data-title="Link">
-                    <a href="https://github.com/QwenLM/Qwen-VL" target="_blank">
-                      <button class="custom-button-flat"><img src="img/ali.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-                  <tr>
-                    <td data-title="Model">Qwen-VL-Chat</td>
-                    <td data-title="Model Size">9.6b</td>
-                                        <td data-title="Open-Weight"><span class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
-                      Yes
-                    </span>
-                    <td data-title="Version">-</td>
-                    <td data-title="Creator">Ali</td>
-                    <td data-title="Source">HuggingFace</td>
-                    <td data-title="Link">
-                    <a href="https://github.com/QwenLM/Qwen-VL" target="_blank">
-                      <button class="custom-button-flat"><img src="img/ali.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-                  <tr>
-                    <td data-title="Model">LLaVA-1.6-34b</td>
-                    <td data-title="Model Size">34b</td>
-                                        <td data-title="Open-Weight"><span class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
-                      Yes
-                    </span>
-                    <td data-title="Version">v1.6</td>
-                    <td data-title="Creator">Microsoft</td>
-                    <td data-title="Source">HuggingFace</td>
-                    <td data-title="Link">
-                    <a href="https://huggingface.co/liuhaotian/llava-v1.6-34b" target="_blank">
-                      <button class="custom-button-flat"><img src="img/llava.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-
-
-                  <tr>
-                    <td data-title="Model">LLaVA-1.6-13b</td>
-                    <td data-title="Model Size">13b</td>
-                                        <td data-title="Open-Weight"><span class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
-                      Yes
-                    </span>
-                    <td data-title="Version">v1.6</td>
-                    <td data-title="Creator">Microsoft</td>
-                    <td data-title="Source">HuggingFace</td>
-                    <td data-title="Link">
-                    <a href="https://huggingface.co/liuhaotian/llava-v1.6-13b" target="_blank">
-                      <button class="custom-button-flat"><img src="img/llava.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-
-                  <tr>
-                    <td data-title="Model">LLaVA-1.6-7b</td>
-                    <td data-title="Model Size">33b</td>
-                                        <td data-title="Open-Weight"><span class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
-                      Yes
-                    </span>
-                    <td data-title="Version">v1.6</td>
-                    <td data-title="Creator">Microsoft</td>
-                    <td data-title="Source">HuggingFace</td>
-                    <td data-title="Link">
-                    <a href="https://huggingface.co/liuhaotian/llava-v1.6-7b" target="_blank">
-                      <button class="custom-button-flat"><img src="img/llava.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-                  <tr>
-                    <td data-title="Model">LLaVA-1.5-13b</td>
-                    <td data-title="Model Size">13b</td>
-                                        <td data-title="Open-Weight"><span class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
-                      Yes
-                    </span>
-                    <td data-title="Version">v1.5</td>
-                    <td data-title="Creator">Microsoft</td>
-                    <td data-title="Source">HuggingFace</td>
-                    <td data-title="Link">
-                    <a href="https://huggingface.co/liuhaotian/llava-v1.5-13b" target="_blank">
-                      <button class="custom-button-flat"><img src="img/llava.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-                  <tr>
-                    <td data-title="Model">CogVLM</td>
-                    <td data-title="Model Size">16b</td>
-                                        <td data-title="Open-Weight"><span class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
-                      Yes
-                    </span>
-                    <td data-title="Version">-</td>
-                    <td data-title="Creator">Tsinghua</td>
-                    <td data-title="Source">HuggingFace</td>
-                    <td data-title="Link">
-                    <a href="https://github.com/THUDM/CogVLM" target="_blank">
-                      <button class="custom-button-flat"><img src="img/cogvlm.png"></button>
-                      </a>
-                      </td>
-                  </tr>
-                  
-                  <!-- ...continue for other rows... -->
-                  <!-- Repeat for other rows, alternating color for LightCyan rows -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    <h1 class="supportTitle">Datasets</h1>
 
     <div class="content">
-      <div class="content-table flex-column">
-        <h2 class="supportTitle2">Detailed Selected Dataset</h2>
-        <br>
-        <div class="flex-row">
+      <div class="container is-max-desktop">
+        <div class="featurecard-container">
           <div class="custom-table-container center add-top-margin-small">
             <table class="custom-table">
-              <caption>Datasets and corresponding tasks in benchmark construction, 
-                each task is matched with several required abilities (Rec.Recognition, Comp.-Comprehension, Inf.-Inferential, Mul.-Multilingual)</caption>
+              <thead>
+                <tr>
+                  <th>Model</th>
+                  <th>Model Size</th>
+                  <th>Open-Weight</th>
+                  <th>Version</th>
+                  <th>Creator</th>
+                  <th>Source</th>
+                  <th>Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-title="Model">GPT-4V(ision)</td>
+                  <td data-title="Model Size">unknown</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
+                      No
+                    </span>
+                  <td data-title="Version">-</td>
+                  <td data-title="Creator">OpenAI</td>
+                  <td data-title="Source">OpenAI API</td>
+                  <td data-title="Link">
+                    <a href="https://openai.com/research/gpt-4v-system-card" target="_blank">
+                      <button class="custom-button-flat"><img src="img/openai.png"></button>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-title="Model">Gemini-Pro-Vision</td>
+                  <td data-title="Model Size">unknown</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
+                      No
+
+                    </span>
+
+                  <td data-title="Version">v1.0</td>
+                  <td data-title="Creator">Google</td>
+                  <td data-title="Source">Google API</td>
+                  <td data-title="Link">
+                    <a href="https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemini-pro-vision"
+                      target="_blank">
+                      <button class="custom-button-flat"><img src="img/palm2.png"></button>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-title="Model">Gemini-Pro-Vision</td>
+                  <td data-title="Model Size">unknown</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
+                      No
+                    </span>
+                  </td>
+                  <td data-title="Version">v1.0-latest</td>
+                  <td data-title="Creator">Google</td>
+                  <td data-title="Source">Google API</td>
+                  <td data-title="Link">
+                    <a href="https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemini-pro-vision"
+                      target="_blank">
+                      <button class="custom-button-flat"><img src="img/palm2.png"></button>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-title="Model">Qwen-VL-Max</td>
+                  <td data-title="Model Size">unknown</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
+                      No
+                    </span>
+                  <td data-title="Version">-</td>
+                  <td data-title="Creator">Ali</td>
+                  <td data-title="Source">Ali API</td>
+                  <td data-title="Link">
+                    <a href="https://github.com/QwenLM/Qwen-VL" target="_blank">
+                      <button class="custom-button-flat"><img src="img/ali.png"></button>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-title="Model">Qwen-VL-Plus</td>
+                  <td data-title="Model Size">unknown</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-yellow-100 text-yellow-700 font-bold py-1 px-3 rounded-full">
+                      No
+                    </span>
+                  <td data-title="Version">-</td>
+                  <td data-title="Creator">Ali</td>
+                  <td data-title="Source">Ali API</td>
+                  <td data-title="Link">
+                    <a href="https://github.com/QwenLM/Qwen-VL" target="_blank">
+                      <button class="custom-button-flat"><img src="img/ali.png"></button>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-title="Model">Qwen-VL-Chat</td>
+                  <td data-title="Model Size">9.6b</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
+                      Yes
+                    </span>
+                  <td data-title="Version">-</td>
+                  <td data-title="Creator">Ali</td>
+                  <td data-title="Source">HuggingFace</td>
+                  <td data-title="Link">
+                    <a href="https://github.com/QwenLM/Qwen-VL" target="_blank">
+                      <button class="custom-button-flat"><img src="img/ali.png"></button>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-title="Model">LLaVA-1.6-34b</td>
+                  <td data-title="Model Size">34b</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
+                      Yes
+                    </span>
+                  <td data-title="Version">v1.6</td>
+                  <td data-title="Creator">Microsoft</td>
+                  <td data-title="Source">HuggingFace</td>
+                  <td data-title="Link">
+                    <a href="https://huggingface.co/liuhaotian/llava-v1.6-34b" target="_blank">
+                      <button class="custom-button-flat"><img src="img/llava.png"></button>
+                    </a>
+                  </td>
+                </tr>
+
+
+                <tr>
+                  <td data-title="Model">LLaVA-1.6-13b</td>
+                  <td data-title="Model Size">13b</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
+                      Yes
+                    </span>
+                  <td data-title="Version">v1.6</td>
+                  <td data-title="Creator">Microsoft</td>
+                  <td data-title="Source">HuggingFace</td>
+                  <td data-title="Link">
+                    <a href="https://huggingface.co/liuhaotian/llava-v1.6-13b" target="_blank">
+                      <button class="custom-button-flat"><img src="img/llava.png"></button>
+                    </a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td data-title="Model">LLaVA-1.6-7b</td>
+                  <td data-title="Model Size">33b</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
+                      Yes
+                    </span>
+                  <td data-title="Version">v1.6</td>
+                  <td data-title="Creator">Microsoft</td>
+                  <td data-title="Source">HuggingFace</td>
+                  <td data-title="Link">
+                    <a href="https://huggingface.co/liuhaotian/llava-v1.6-7b" target="_blank">
+                      <button class="custom-button-flat"><img src="img/llava.png"></button>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-title="Model">LLaVA-1.5-13b</td>
+                  <td data-title="Model Size">13b</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
+                      Yes
+                    </span>
+                  <td data-title="Version">v1.5</td>
+                  <td data-title="Creator">Microsoft</td>
+                  <td data-title="Source">HuggingFace</td>
+                  <td data-title="Link">
+                    <a href="https://huggingface.co/liuhaotian/llava-v1.5-13b" target="_blank">
+                      <button class="custom-button-flat"><img src="img/llava.png"></button>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td data-title="Model">CogVLM</td>
+                  <td data-title="Model Size">16b</td>
+                  <td data-title="Open-Weight"><span
+                      class="bg-green-100 text-green-700 font-bold py-1 px-3 rounded-full">
+                      Yes
+                    </span>
+                  <td data-title="Version">-</td>
+                  <td data-title="Creator">Tsinghua</td>
+                  <td data-title="Source">HuggingFace</td>
+                  <td data-title="Link">
+                    <a href="https://github.com/THUDM/CogVLM" target="_blank">
+                      <button class="custom-button-flat"><img src="img/cogvlm.png"></button>
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- ...continue for other rows... -->
+                <!-- Repeat for other rows, alternating color for LightCyan rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="Datasets">
+    <h1 class="title">Detailed Selected Dataset</h1>
+    <br>
+    <div class="content">
+      <div class="container is-max-desktop">
+        <div class="featurecard-container">
+          <div class="custom-table-container center add-top-margin-small">
+            <table class="custom-table">
+              <caption>Datasets and corresponding tasks in benchmark construction,
+                each task is matched with several required abilities (Rec.Recognition, Comp.-Comprehension,
+                Inf.-Inferential, Mul.-Multilingual)</caption>
               <thead>
                 <tr class="bg-color-blue">
                   <th>Dataset</th>
@@ -645,47 +2785,71 @@
               </tbody>
             </table>
           </div>
+
         </div>
-        <br><br>
-
-
-  
-  <h1 class="supportTitle">Citation</h1>
-  <br>
-  <div class="content">
-  <div class="flex-row">
-    <div class="flex-item flex-item-stretch-4 flex-column">
-
-  <pre class="bibtax">
-    @article{chen2024mllm,
-      title={MLLM-as-a-Judge: Assessing Multimodal LLM-as-a-Judge with Vision-Language Benchmark},
-      author={Chen, Dongping and Chen, Ruoxi and Zhang, Shilin and Liu, Yinuo and Wang, Yaochen and Zhou, Huichi and Zhang, Qihui and Zhou, Pan and Wan, Yao and Sun, Lichao},
-      journal={arXiv preprint arXiv:2402.04788},
-      year={2024}
-    }
-    </pre>
-  <br>
-  </div>
-</div>
-  </div>
-
-  <div class="content">
-  <div id="supportContainer">
-    <h1 class="supportTitle">MLLM-as-a-Judge Team</h1>
-    <br>
-
-    <div id="logoContainer">
-      <img src="img/logos/HUST.png" alt="School 1" class="schoolLogo">
-      <img src="img/logos/Lehigh-University-logo.png" alt="School 2" class="schoolLogo">
-   
+      </div>
     </div>
+  </section>
+
+  <!-- <section class="section" id="Acknoledgement">
+    <div class="container is-max-desktop content">
+      <h1 class="supportTitle">Acknowledgement</h1>
+      <md-block>
+        Many thanks to Yue Huang for his invalueble effort in this project.
+      </md-block>
+    </div>
+  </section> -->
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h1 class="title">BibTeX</h1>
+      <pre><code>@article{chen2024mllm,
+        title={MLLM-as-a-Judge: Assessing Multimodal LLM-as-a-Judge with Vision-Language Benchmark},
+        author={Chen, Dongping and Chen, Ruoxi and Zhang, Shilin and Liu, Yinuo and Wang, Yaochen and Zhou, Huichi and Zhang, Qihui and Zhou, Pan and Wan, Yao and Sun, Lichao},
+        journal={arXiv preprint arXiv:2402.04788},
+        year={2024}
+      }</code></pre>
+    </div>
+  </section>
+  <div class="content">
+    <div id="supportContainer">
+      <h1 class="supportTitle">MLLM-as-a-Judge Team</h1>
+      <br>
+
+      <div id="logoContainer">
+        <img src="img/logos/HUST.png" alt="School 1" class="schoolLogo">
+        <img src="img/logos/Lehigh-University-logo.png" alt="School 2" class="schoolLogo">
+        <!-- <img src="img/logos/ND.png" alt="School 3" class="schoolLogo"> -->
+        <!-- <img src="img/logos/ND.png" alt="School 3" class="schoolLogo"> -->
+        <!-- <img src="img/logos/Microsoft.png" alt="School 4" class="schoolLogo"> -->
+
+      </div>
 
 
+    </div>
   </div>
-</div>
-  <div class="footer-container"></div>
-  </div>
-  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source
+                code</a> of this website,
+              we just ask that you link back to this page in the footer.
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 
 </html>
